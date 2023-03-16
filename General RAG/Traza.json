@@ -1,0 +1,62 @@
+{
+    "metadata": {
+        "kernelspec": {
+            "name": "SQL",
+            "display_name": "SQL",
+            "language": "sql"
+        },
+        "language_info": {
+            "name": "sql",
+            "version": ""
+        }
+    },
+    "nbformat_minor": 2,
+    "nbformat": 4,
+    "cells": [
+        {
+            "cell_type": "markdown",
+            "source": [
+                "Esto sirve para ver la trazabilidad de las piezas."
+            ],
+            "metadata": {
+                "azdata_cell_guid": "338da465-b720-4de6-a1ba-be3d9343f98a"
+            },
+            "attachments": {}
+        },
+        {
+            "cell_type": "code",
+            "source": [
+                "--Ejecutar para ver la traza de un numero de tranmision\n",
+                "SELECT\n",
+                "    t.Linea [LineName],\n",
+                "    t.NP_FINAL [PartNo],\n",
+                "    t.Modelo [Client],\n",
+                "    t.Telesis_no [UnitID],\n",
+                "    CAST(t.fecha_scan + ' ' + t.hora_scan AS DATETIME) [TimeStamp],\n",
+                "    e.puesto_no [PointOfUseCode],\n",
+                "    e.component [ComponentNo],\n",
+                "    bom.ARCTLIB01 [Description],\n",
+                "    e.rev_cc [Revision],\n",
+                "    e.eti_no [EtiNo],\n",
+                "    e.lote [LotNo],bom.NOCTCOMCPT\n",
+                "FROM MXSRVTRACA.TRAZAB.dbo.Trazab_WB t\n",
+                "LEFT JOIN MXSRVTRACA.TRAZAB.dbo.Etis_WB e WITH(NOLOCK)\n",
+                "    ON e.SET_ID = t.ETI_no\n",
+                "LEFT JOIN MXSRVTRACA.TRAZAB.cegid.bom bom\n",
+                "    ON bom.NOKTCODPF = t.NP_FINAL AND bom.NOKTCOMPF = RIGHT(t.Linea, 2)\n",
+                "    AND bom.NOCTCODOPE = e.puesto_no AND RTRIM(bom.NOCTCODECP) = e.component\n",
+                "    AND CASE WHEN LEFT(bom.NOCTCOMCPT, 1) IN ('X', 'Y', '0') THEN bom.NOCTCOMCPT ELSE LEFT(bom.NOCTCOMCPT, 1) END\n",
+                "    = CASE WHEN LEFT(e.rev_cc, 1) IN ('X', 'Y', '0') THEN e.rev_cc ELSE LEFT(e.rev_cc, 1) END\n",
+                "WHERE t.Telesis_no= '9002329' --<-- aqui va el numero de transmision.\n",
+                "ORDER BY e.puesto_no, e.component;"
+            ],
+            "metadata": {
+                "azdata_cell_guid": "488e2df6-c40e-486a-8c5f-fcc672e8cb55",
+                "language": "sql",
+                "tags": []
+            },
+            "outputs": [],
+            "execution_count": 2
+        }
+    ]
+}
