@@ -7,8 +7,8 @@ SELECT t.sufix_cegid AS [Patente],
        t.patent6,
        t.patent7,
        t.patent8
-FROM [MXSRVTRACA].[APPS].[dbo].[patent] t
-JOIN [MXSRVCEGID].[PMI].[dbo].[UARTICLE] C
-ON t.sufix_cegid = C.ARKTPATENT COLLATE French_CI_AS 
+FROM [MXSRVCEGID].[PMI].[dbo].[UARTICLE] C
+JOIN [MXSRVTRACA].[APPS].[dbo].[patent] t
+ON C.ARKTPATENT COLLATE French_CI_AS = t.sufix_cegid  
 WHERE C.ARKTCODART = '85779'
 order by t.sufix_cegid asc
