@@ -35,20 +35,25 @@ DECLARE
 		@line_code		= t.[type] + ' ' + t.[line],
 		@reference		= RTRIM(p.ref_ext),
 		@ratio			= t.ratio,
-        @Origen         =RTRIM(C.APKORIGEN),
         @is_double_lid	= CASE WHEN t.print_count = 1 THEN 0 ELSE 1 END
         FROM APPS.dbo.pro_tms t
         JOIN APPS.dbo.pro_production p ON p.id = t.id_reference
-        JOIN [MXSRVCEGID].[PMI].[dbo].[UARTICLE] C ON RTRIM(C.ARKTCODART) = t.serial COLLATE French_CI_AS and RTRIM(C.ARKTCOMART) = t.rev COLLATE French_CI_AS
+        --JOIN [MXSRVCEGID].[PMI].[dbo].[UARTICLE] C ON RTRIM(C.ARKTCODART) = t.serial COLLATE French_CI_AS and RTRIM(C.ARKTCOMART) = t.rev COLLATE French_CI_AS
         WHERE t.id = @transmission_id;
-        SELECT CONCAT(@part_no,' ',@part_rev,' ',@Origen)
+		set @Origen = (SELECT * FROM ufn_GetArticleOrigenCegid(@part_no,@part_rev))
+		
+        SELECT CONCAT(@line, ' ',@type,' ',@part_no,' ',@part_rev,' ',@julian_day,' ',@year,' ',@line_code,' ',@reference,' ',@ratio,' ',Rtrim(@Origen))
     --=======================================================================
     --SELECT top 100 * FROM [MXSRVCEGID].[PMI].[dbo].[UARTICLE] C
 
 --SELECT top 1000 * FROM APPS.dbo.pro_production -- p ON p.id = t.id_reference
 
 -- 82015 D1
-SELECT top 1000 
--- --*
-ARKTCODART,ARKTCOMART,APKORIGEN 
-FROM [MXSRVCEGID].[PMI].[dbo].[UARTICLE] WHERE RTRIM(ARKTCODART) like (CONCAT('%',@part_no,'%')) and RTRIM(ARKTCOMART) like (CONCAT('%',@part_rev,'%'))
+-- SELECT top 1
+--         ARKTCODART as [Numero de Parte],
+--         ARKTCOMART as [Numero de Revision],
+--         APKORIGEN as [Origen]
+-- FROM [MXSRVCEGID].[PMI].[dbo].[UARTICLE] WHERE RTRIM(ARKTCODART) like (CONCAT('%',@part_no,'%')) and RTRIM(ARKTCOMART) like (CONCAT('%',@part_rev,'%'))
+
+-- set @Origen = (SELECT * FROM ufn_GetArticleOrigenCegid(@part_no,@part_rev))
+ select RTRIM(@Origen)
