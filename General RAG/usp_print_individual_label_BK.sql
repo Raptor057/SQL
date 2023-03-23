@@ -1,3 +1,10 @@
+USE [functional_tests]
+GO
+/****** Object:  StoredProcedure [dbo].[usp_print_individual_label]    Script Date: 3/22/2023 4:51:54 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
 -- =============================================
 -- Author:		Marcos Vazquez
 -- Create date: November 26, 2021
@@ -19,9 +26,9 @@
 -- Returns:     Zero if everything went OK.
 --
 -- Change History:
---   00/00/00 XX:	...
+--   22/03/10 MV:	Trimmed right part of ratio value as it might contain blank spaces.
 -- =============================================
-CREATE PROCEDURE [dbo].[usp_print_individual_label]
+ALTER PROCEDURE [dbo].[usp_print_individual_label]
 	@transmission_id BIGINT,
 	@message NVARCHAR(4000) OUTPUT
 AS
@@ -39,9 +46,9 @@ BEGIN
 		@julian_day INT,			-- Day of the year
 		@year INT,					-- Year (four digits)
 		@line_code NVARCHAR(50),	-- Product type + line identifier
+		@station NVARCHAR(50),	-- LINE P STATION
 		@reference NVARCHAR(50),	-- External reference
 		@ratio NVARCHAR(50),		-- ?
-		@origen NVARCHAR(50),		-- Get Origen from CEGID
 		@is_double_lid BIT;			-- Indicates whether double print is required
 
 	SELECT
@@ -54,12 +61,11 @@ BEGIN
 		@line_code		= t.[type] + ' ' + t.[line],
 		@reference		= RTRIM(p.ref_ext),
 		@ratio			= t.ratio,
+		@station        = t.station,
 		@is_double_lid	= CASE WHEN t.print_count = 1 THEN 0 ELSE 1 END
 	FROM APPS.dbo.pro_tms t
     JOIN APPS.dbo.pro_production p ON p.id = t.id_reference
     WHERE t.id = @transmission_id;
-	set @origen =(SELECT * FROM ufn_GetArticleOrigenCegid(@part_no,@part_rev)) --Get Origen by part_no and part_rev directly of CEGID
-
 
 	DECLARE @URL NVARCHAR(MAX) = REPLACE(REPLACE('http://mxsrvapps/gtservices/printing/api/productlines/{line}/individuallabels/{type}', '{line}', @line), '{type}', @type);
 	DECLARE @Object AS INT;
@@ -74,24 +80,24 @@ BEGIN
 		"LineCode": "{lineCode}",
 		"ExternalReference": "{reference}",
 		"Ratio": "{ratio}",
-		"Origen": "{origen}",
-		"IsDoubleLid": {isDoubleLid}
+		"IsDoubleLid": {isDoubleLid},
+		"Station": {station},
 	}';
 
-	--Se agrego un (REPLACE en esta linea
 	SET @Body = REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(@Body,
 						'{tmId}', CAST(@transmission_id AS NVARCHAR(50))),
 						'{partRev}', @part_rev),
 						'{partNo}', @part_no),
+						'{station}', @station),
 						'{julianDay}', CAST(@julian_day AS NVARCHAR(50))),
 						'{year}', CAST(@year AS NVARCHAR(50))),
-						'{lineCode}', @line_code),
+						'{lineCode}', @line),
 						'{reference}', @reference),
-						'{ratio}', @ratio),
-						'{origen}', RTRIM(@origen)), --Se el campo Origen.
+						-- 2022-03-10 MV: Value might have blank space to the right affecting the label output.
+						'{ratio}', ISNULL(NULLIF(RTRIM(@ratio), ''), 'NA')),
 						'{isDoubleLid}', CASE WHEN @is_double_lid = 1 THEN 'true' ELSE 'false' END)
 	;
-
+	print @body;
 	EXEC @hr = sp_OACreate 'MSXML2.XMLHTTP', @Object OUT;
 	IF @hr <> 0
 	BEGIN

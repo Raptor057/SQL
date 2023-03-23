@@ -3,8 +3,14 @@ FROM dbo.LinePointsOfUse lpou
 JOIN dbo.PointOfUseEtis poue
     ON poue.PointOfUseCode = lpou.PointOfUseCode
     AND poue.UtcEffectiveTime <= GETUTCDATE() AND poue.UtcUsageTime IS NULL AND poue.UtcExpirationTime IS NULL
-WHERE lpou.LineCode = 'LE'
---and poue.PointOfUseCode = 'E65'
+WHERE lpou.LineCode = 'LH'
+and poue.PointOfUseCode = 'H05'
+and poue.PointOfUseCode = 'H01'
+
+--36356
+--00594
+--32096
+
 --and poue.PointOfUseCode = 'E14'
 ORDER by UtcEffectiveTime asc
 
