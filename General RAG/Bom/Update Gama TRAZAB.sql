@@ -1,2 +1,2 @@
 -- MXSRVTRACA TRAZAB
-EXECUTE [dbo].[usp_update_bom_info] '85651', 'LH'
+EXECUTE [dbo].[usp_update_bom_info] 'GT87145', 'LE'
