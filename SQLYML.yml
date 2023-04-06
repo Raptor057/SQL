@@ -11,7 +11,7 @@ steps:
    git checkout main
    git add --all
    git push https://%git%@github.com/RarriagaGT/Querys_SQL.git --force
-  displayName: GitPus
+  displayName: GitPus From MXSRVDEV_GTMEX
   env:
     git: $(GIT)
     
