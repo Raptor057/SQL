@@ -1,0 +1,1507 @@
+{
+    "metadata": {
+        "kernelspec": {
+            "name": "SQL",
+            "display_name": "SQL",
+            "language": "sql"
+        },
+        "language_info": {
+            "name": "sql",
+            "version": ""
+        }
+    },
+    "nbformat_minor": 2,
+    "nbformat": 4,
+    "cells": [
+        {
+            "cell_type": "markdown",
+            "source": [
+                "# Base de datos GTT\n",
+                "\n",
+                "## Server: MXSRVAPPS\n",
+                "\n",
+                "## Database: gtt\n",
+                "\n",
+                "### Coneccion:\n",
+                "\n",
+                "### Usuario: svc\\_trace\\_v2\n",
+                "\n",
+                "### Pass: Consultar KEEPASS"
+            ],
+            "metadata": {
+                "azdata_cell_guid": "404c6d03-f88e-44fa-b7ce-e37033e0ccc5"
+            },
+            "attachments": {}
+        },
+        {
+            "cell_type": "markdown",
+            "source": [
+                "## A continuacion hay unos query que te serviran para consultar informacion sobre la base de datos.\n",
+                "Este query te da el nombre, solo el nombre de las tablas de la base de datos.\n",
+                "<span style=\"font-family: Consolas, &quot;Courier New&quot;, monospace; font-size: 12px; white-space: pre; color: rgb(86, 156, 214);\">SELECT</span> <span style=\"font-family: Consolas, &quot;Courier New&quot;, monospace; font-size: 12px; white-space: pre; color: rgb(220, 220, 170);\">CAST</span><span style=\"color: rgb(255, 255, 255); font-family: Consolas, &quot;Courier New&quot;, monospace; font-size: 12px; white-space: pre;\">(table_name </span> <span style=\"font-family: Consolas, &quot;Courier New&quot;, monospace; font-size: 12px; white-space: pre; color: rgb(86, 156, 214);\">as</span> <span style=\"font-family: Consolas, &quot;Courier New&quot;, monospace; font-size: 12px; white-space: pre; color: rgb(86, 156, 214);\">varchar</span><span style=\"color: rgb(255, 255, 255); font-family: Consolas, &quot;Courier New&quot;, monospace; font-size: 12px; white-space: pre;\">) &nbsp;</span>        <span style=\"font-family: Consolas, &quot;Courier New&quot;, monospace; font-size: 12px; white-space: pre; color: rgb(86, 156, 214);\">FROM</span> <span style=\"color: rgb(255, 255, 255); font-family: Consolas, &quot;Courier New&quot;, monospace; font-size: 12px; white-space: pre;\">INFORMATION_SCHEMA.TABLES</span>\n",
+                "Este qwery te da la informacion de todas las tablas , sus esquemas.\n",
+                "<span style=\"color: #569cd6;\">SELECT</span> <span style=\"color: #d4d4d4;\">*</span> <span style=\"color: #569cd6;\">FROM</span> \\[INFORMATION\\_SCHEMA\\].\\[TABLES\\]\n",
+                "Este query te da informacion sobre las vistas de toda la base de datos.\n",
+                "<span style=\"color: #569cd6;\">SELECT</span> <span style=\"color: #d4d4d4;\">*</span> <span style=\"color: #569cd6;\">FROM</span> \\[INFORMATION\\_SCHEMA\\].\\[VIEWS\\]\n",
+                "Este query te da informacion sobre los procedimientos de la base de datos.\n",
+                "<span style=\"color: #569cd6;\">select</span> <span style=\"color: #d4d4d4;\">*</span> <span style=\"color: #569cd6;\">from</span> \\[INFORMATION\\_SCHEMA\\].\\[ROUTINES\\] <span style=\"color: #569cd6;\">where</span> routine\\_type<span style=\"color: #d4d4d4;\">=</span><span style=\"color: #ce9178;\">'PROCEDURE'</span>\n",
+                "Para mas informacion consultar \"[SQLSHACK](https://www.sqlshack.com/es/las-vistastablasfunciones-de-sistema-de-sql-server-preguntas-frecuentes-y-soluciones-a-problemas-de-la-vida-real/)\"<span style=\"color: #ce9178;\"><br></span>"
+            ],
+            "metadata": {
+                "azdata_cell_guid": "2d27620b-4c6c-4d13-923b-92929c1af5e7"
+            },
+            "attachments": {}
+        },
+        {
+            "cell_type": "markdown",
+            "source": [
+                "> **dbo.SubAssemblies** Relacion de ETIs de subensamble. Se utiliza en motores, aunque ya no se como quedo despues de tanto tiempo  y tantos cambios."
+            ],
+            "metadata": {
+                "azdata_cell_guid": "794b4a3a-a1d6-45dc-9625-6f625dbf386f"
+            },
+            "attachments": {}
+        },
+        {
+            "cell_type": "code",
+            "source": [
+                "SELECT * FROM SubAssemblies"
+            ],
+            "metadata": {
+                "azdata_cell_guid": "b95171c4-da62-4be4-ade3-7fb20c861ec1",
+                "language": "sql",
+                "tags": [
+                    "hide_input"
+                ]
+            },
+            "outputs": [],
+            "execution_count": null
+        },
+        {
+            "cell_type": "markdown",
+            "source": [
+                "> **dbo.ProductionLogs** Informacion de piezas producidas. Se utiliza en el reporte de hora por hora."
+            ],
+            "metadata": {
+                "language": "sql",
+                "azdata_cell_guid": "05969e03-0db1-40de-99d1-490470ec443a"
+            },
+            "attachments": {}
+        },
+        {
+            "cell_type": "code",
+            "source": [
+                "SELECT * FROM ProductionLogs"
+            ],
+            "metadata": {
+                "azdata_cell_guid": "cad8788b-e538-48c6-8014-8f7161f52d51",
+                "language": "sql",
+                "tags": [
+                    "hide_input"
+                ]
+            },
+            "outputs": [],
+            "execution_count": null
+        },
+        {
+            "cell_type": "markdown",
+            "source": [
+                "> **<span style=\"font-size:11.0pt;line-height:107%;\n",
+                "> font-family:&quot;Calibri&quot;,sans-serif;mso-ascii-theme-font:minor-latin;mso-fareast-font-family:\n",
+                "> Calibri;mso-fareast-theme-font:minor-latin;mso-hansi-theme-font:minor-latin;\n",
+                "> mso-bidi-font-family:&quot;Times New Roman&quot;;mso-bidi-theme-font:minor-bidi;\n",
+                "> mso-ansi-language:ES-MX;mso-fareast-language:EN-US;mso-bidi-language:AR-SA\">dbo.ShiftScheduledIntervals</span>** <span style=\"font-size:11.0pt;line-height:107%;font-family:&quot;Calibri&quot;,sans-serif;\n",
+                "> mso-ascii-theme-font:minor-latin;mso-fareast-font-family:Calibri;mso-fareast-theme-font:\n",
+                "> minor-latin;mso-hansi-theme-font:minor-latin;mso-bidi-font-family:&quot;Times New Roman&quot;;\n",
+                "> mso-bidi-theme-font:minor-bidi;mso-ansi-language:ES-MX;mso-fareast-language:\n",
+                "> EN-US;mso-bidi-language:AR-SA\"> Relacion de horarios por turno. Se utiliza en el hora por hora.</span>"
+            ],
+            "metadata": {
+                "language": "sql",
+                "azdata_cell_guid": "8066945f-6ff7-47bb-8ed9-f9d52860c255"
+            },
+            "attachments": {}
+        },
+        {
+            "cell_type": "code",
+            "source": [
+                "SELECT * FROM ShiftScheduleIntervals"
+            ],
+            "metadata": {
+                "azdata_cell_guid": "5084807b-c70b-4036-afac-30f1d405495e",
+                "language": "sql",
+                "tags": [
+                    "hide_input"
+                ]
+            },
+            "outputs": [],
+            "execution_count": null
+        },
+        {
+            "cell_type": "markdown",
+            "source": [
+                "> **dbo.part\\_number\\_classifications** No recuerdo que es, pero supongo no se utiliza."
+            ],
+            "metadata": {
+                "language": "sql",
+                "azdata_cell_guid": "77d504d8-9d04-4dca-b3ca-6918aefe8151"
+            },
+            "attachments": {}
+        },
+        {
+            "cell_type": "code",
+            "source": [
+                "SELECT * FROM part_number_classifications"
+            ],
+            "metadata": {
+                "azdata_cell_guid": "0a60fce9-1f01-4738-a3b0-1b079bebe697",
+                "language": "sql",
+                "tags": [
+                    "hide_input"
+                ]
+            },
+            "outputs": [],
+            "execution_count": null
+        },
+        {
+            "cell_type": "markdown",
+            "source": [
+                "> **dbo.LineShiftSchedules** Calendario de turnos validos por linea. Es decir, periodo de tiempo en el cual fue valido un turno."
+            ],
+            "metadata": {
+                "language": "sql",
+                "azdata_cell_guid": "63e8f125-dd98-484f-a8ec-14e947f1fbff"
+            },
+            "attachments": {}
+        },
+        {
+            "cell_type": "code",
+            "source": [
+                "SELECT * FROM LineShiftSchedules"
+            ],
+            "metadata": {
+                "azdata_cell_guid": "0064d0d7-7aea-47fd-a6a2-e257e5d6e845",
+                "language": "sql",
+                "tags": [
+                    "hide_input"
+                ]
+            },
+            "outputs": [],
+            "execution_count": null
+        },
+        {
+            "cell_type": "markdown",
+            "source": [
+                "> **dbo.points\\_of\\_use** Relacion de tuneles. Ya no se utiliza."
+            ],
+            "metadata": {
+                "language": "sql",
+                "azdata_cell_guid": "dc1a4fe5-b5eb-4d62-b180-2ec4ad661ef8"
+            },
+            "attachments": {}
+        },
+        {
+            "cell_type": "code",
+            "source": [
+                "SELECT * FROM points_of_use"
+            ],
+            "metadata": {
+                "azdata_cell_guid": "8fb0cca0-cbc9-48cf-955a-986f1cab4f30",
+                "language": "sql",
+                "tags": [
+                    "hide_input"
+                ]
+            },
+            "outputs": [],
+            "execution_count": null
+        },
+        {
+            "cell_type": "markdown",
+            "source": [
+                "> **dbo.LineModelCapabilities** Matriz de rates en las lineas por cada modelo. La informacion la cargue del archivo que me compartio Erick Nevares."
+            ],
+            "metadata": {
+                "language": "sql",
+                "azdata_cell_guid": "8e87975b-6365-4aca-89c2-ecf7bc22efca"
+            },
+            "attachments": {}
+        },
+        {
+            "cell_type": "code",
+            "source": [
+                "SELECT * FROM LineModelCapabilities"
+            ],
+            "metadata": {
+                "azdata_cell_guid": "453620a5-4341-43e3-a18c-6383b4a05427",
+                "language": "sql",
+                "tags": [
+                    "hide_input"
+                ]
+            },
+            "outputs": [],
+            "execution_count": null
+        },
+        {
+            "cell_type": "markdown",
+            "source": [
+                "> **dbo.bom** Componentes y cantidades, sin especificar tuneles. No recuerdo que se use."
+            ],
+            "metadata": {
+                "language": "sql",
+                "azdata_cell_guid": "7a4376a5-ef84-4e5f-aee1-ff741affa5a9"
+            },
+            "attachments": {}
+        },
+        {
+            "cell_type": "code",
+            "source": [
+                "SELECT * FROM bom"
+            ],
+            "metadata": {
+                "azdata_cell_guid": "45b07229-edfd-417a-acc6-24b953835c34",
+                "language": "sql",
+                "tags": [
+                    "hide_input"
+                ]
+            },
+            "outputs": [],
+            "execution_count": null
+        },
+        {
+            "cell_type": "markdown",
+            "source": [
+                "> **dbo.ShiftSchedules** Relacion de turnos."
+            ],
+            "metadata": {
+                "language": "sql",
+                "azdata_cell_guid": "df263e71-3c6c-4ad7-a43b-0a7fb023c7a9"
+            },
+            "attachments": {}
+        },
+        {
+            "cell_type": "code",
+            "source": [
+                "SELECT * FROM ShiftSchedules"
+            ],
+            "metadata": {
+                "azdata_cell_guid": "3471021d-4330-47e3-a562-55615e8ba6bd",
+                "language": "sql",
+                "tags": [
+                    "hide_input"
+                ]
+            },
+            "outputs": [],
+            "execution_count": null
+        },
+        {
+            "cell_type": "markdown",
+            "source": [
+                "> **dbo.point\\_of\\_use\\_mappings** No recuerdo para que era. Se creo para el requerimiento de Helen."
+            ],
+            "metadata": {
+                "language": "sql",
+                "azdata_cell_guid": "8f685b67-3367-4be6-90d5-e0c75e70d3ba"
+            },
+            "attachments": {}
+        },
+        {
+            "cell_type": "code",
+            "source": [
+                "SELECT * FROM point_of_use_mappings"
+            ],
+            "metadata": {
+                "azdata_cell_guid": "482e33b3-151a-484e-8b7e-f0a5799fa5a7",
+                "language": "sql",
+                "tags": [
+                    "hide_input"
+                ]
+            },
+            "outputs": [],
+            "execution_count": null
+        },
+        {
+            "cell_type": "markdown",
+            "source": [
+                "> **dbo.LineGamma** Una relacion de las gammas por cada cambio de modelo en las lineas. Para mantener el historico de los tuneles utilizados."
+            ],
+            "metadata": {
+                "language": "sql",
+                "azdata_cell_guid": "00d2d753-b4d2-414e-85ae-d3e6aff9a380"
+            },
+            "attachments": {}
+        },
+        {
+            "cell_type": "code",
+            "source": [
+                "SELECT * FROM LineGamma"
+            ],
+            "metadata": {
+                "azdata_cell_guid": "dea1975d-3fd3-4ff0-a0d7-0b2461555196",
+                "language": "sql",
+                "tags": [
+                    "hide_input"
+                ]
+            },
+            "outputs": [],
+            "execution_count": null
+        },
+        {
+            "cell_type": "markdown",
+            "source": [
+                "> **dbo.GlobalSettings** Tabla con informacion general, como el codigo de cliente para CEGID y la zona horaria (que debido al desfase de dos horas del servidor tengo que utilizar formato UTC, que es lo recomendado de igual manera)."
+            ],
+            "metadata": {
+                "language": "sql",
+                "azdata_cell_guid": "baea6b2f-5167-40d3-a404-77b6e524958b"
+            },
+            "attachments": {}
+        },
+        {
+            "cell_type": "code",
+            "source": [
+                "SELECT * FROM GlobalSettings"
+            ],
+            "metadata": {
+                "azdata_cell_guid": "c49d85ed-6de7-4b40-a917-c66c468b257b",
+                "language": "sql",
+                "tags": [
+                    "hide_input"
+                ]
+            },
+            "outputs": [],
+            "execution_count": null
+        },
+        {
+            "cell_type": "markdown",
+            "source": [
+                "> **dbo.Gammas** Reemplazo de la tabla gamma. Lo ideal es que esta tabla se actualice desde la pantalla de carga de material. Actualmente se actualiza la gamma en la base de datos de trazab."
+            ],
+            "metadata": {
+                "language": "sql",
+                "azdata_cell_guid": "4d983c64-07f9-45ee-b41b-06e9811adf08"
+            },
+            "attachments": {}
+        },
+        {
+            "cell_type": "code",
+            "source": [
+                "SELECT * FROM Gammas"
+            ],
+            "metadata": {
+                "azdata_cell_guid": "68d25849-bcfa-427c-bd45-fc775e5ffe85",
+                "language": "sql",
+                "tags": [
+                    "hide_input"
+                ]
+            },
+            "outputs": [],
+            "execution_count": null
+        },
+        {
+            "cell_type": "markdown",
+            "source": [
+                "> **dbo.ProcessHistory** Historial de procesos por los que ha pasado una pieza."
+            ],
+            "metadata": {
+                "language": "sql",
+                "azdata_cell_guid": "4829bc76-f518-4c51-9cad-21d1515157e6"
+            },
+            "attachments": {}
+        },
+        {
+            "cell_type": "code",
+            "source": [
+                "SELECT * FROM ProcessHistory"
+            ],
+            "metadata": {
+                "azdata_cell_guid": "1ffad6b7-6405-4acb-8941-580df31a82df",
+                "language": "sql",
+                "tags": [
+                    "hide_input"
+                ]
+            },
+            "outputs": [],
+            "execution_count": null
+        },
+        {
+            "cell_type": "markdown",
+            "source": [
+                "> **dbo.product\\_line** Relacion de lineas. Ya no se utiliza."
+            ],
+            "metadata": {
+                "language": "sql",
+                "azdata_cell_guid": "1105ab10-e1ad-4b2a-aa61-ac0b0e3cf589"
+            },
+            "attachments": {}
+        },
+        {
+            "cell_type": "code",
+            "source": [
+                "SELECT * FROM product_line"
+            ],
+            "metadata": {
+                "azdata_cell_guid": "4553739d-17e6-4257-9e3e-2eef91b0d01b",
+                "language": "sql",
+                "tags": [
+                    "hide_input"
+                ]
+            },
+            "outputs": [],
+            "execution_count": null
+        },
+        {
+            "cell_type": "markdown",
+            "source": [
+                "> **dbo.LineProductionSchedule** Historico de modelos programados en las lineas. De esta manera, si no se produce nada pero hay programacion, sabemos de cual modelo no se produjo."
+            ],
+            "metadata": {
+                "language": "sql",
+                "azdata_cell_guid": "0279b9d0-abd0-4f4f-87a5-e0fc95943577"
+            },
+            "attachments": {}
+        },
+        {
+            "cell_type": "code",
+            "source": [
+                "SELECT * FROM LineProductionSchedule"
+            ],
+            "metadata": {
+                "azdata_cell_guid": "37f6df63-d9de-415e-8418-9c388f387aed",
+                "language": "sql",
+                "tags": [
+                    "hide_input"
+                ]
+            },
+            "outputs": [],
+            "execution_count": null
+        },
+        {
+            "cell_type": "markdown",
+            "source": [
+                "> **dbo.LineRouting** Relacion de procesos por linea. Se utiliza para validar la promocion de piezas."
+            ],
+            "metadata": {
+                "language": "sql",
+                "azdata_cell_guid": "0e3329f9-9365-4db3-82f2-c25811ccea06"
+            },
+            "attachments": {}
+        },
+        {
+            "cell_type": "code",
+            "source": [
+                "SELECT * FROM LineRouting"
+            ],
+            "metadata": {
+                "azdata_cell_guid": "9ea67673-590e-4617-aeb7-a7bfd2ce4009",
+                "language": "sql",
+                "tags": [
+                    "hide_input"
+                ]
+            },
+            "outputs": [],
+            "execution_count": null
+        },
+        {
+            "cell_type": "markdown",
+            "source": [
+                "> **dbo.point\\_of\\_use\\_etis** Etiquetas cargadas por tunel. Ya no se utiliza."
+            ],
+            "metadata": {
+                "language": "sql",
+                "azdata_cell_guid": "0fa61a79-f565-48e9-8a0b-ebf63b464f85"
+            },
+            "attachments": {}
+        },
+        {
+            "cell_type": "code",
+            "source": [
+                "SELECT * FROM point_of_use_etis"
+            ],
+            "metadata": {
+                "azdata_cell_guid": "0673cac0-58ac-41e4-8a59-43fc500fb21b",
+                "language": "sql",
+                "tags": [
+                    "hide_input"
+                ]
+            },
+            "outputs": [],
+            "execution_count": null
+        },
+        {
+            "cell_type": "markdown",
+            "source": [
+                "> **dbo.gamma** Componentes, cantidades y ubicaciones en tuneles. No recuerdo que se use.\n",
+                "\n",
+                "> **dbo.Gammas** Reemplazo de la tabla gamma. Lo ideal es que esta tabla se actualice desde la pantalla de carga de material. Actualmente se actualiza la gamma en la base de datos de trazab."
+            ],
+            "metadata": {
+                "language": "sql",
+                "azdata_cell_guid": "1f59ac9d-f690-42bc-ac1e-232ef40de8eb"
+            },
+            "attachments": {}
+        },
+        {
+            "cell_type": "code",
+            "source": [
+                "SELECT * FROM gamma"
+            ],
+            "metadata": {
+                "azdata_cell_guid": "3f566998-10b5-4d7e-aff3-f1c2d53761a4",
+                "language": "sql",
+                "tags": [
+                    "hide_input"
+                ]
+            },
+            "outputs": [],
+            "execution_count": null
+        },
+        {
+            "cell_type": "markdown",
+            "source": [
+                "> **dbo.Processes** Relacion de procesos. Hay dos que se comparten entre todas las lineas: 0 y 999, que son nacimiento de pieza y empaque, respectivamente."
+            ],
+            "metadata": {
+                "language": "sql",
+                "azdata_cell_guid": "06c11fa6-1414-4b0d-86ea-593962f994ef"
+            },
+            "attachments": {}
+        },
+        {
+            "cell_type": "code",
+            "source": [
+                "SELECT * FROM Processes"
+            ],
+            "metadata": {
+                "azdata_cell_guid": "09d1c42c-efeb-4fa6-a59b-ada8242f0cbd",
+                "language": "sql",
+                "tags": [
+                    "hide_input"
+                ]
+            },
+            "outputs": [],
+            "execution_count": null
+        },
+        {
+            "cell_type": "markdown",
+            "source": [
+                "> Esta quedo pendiente, hay que ver que datos da, pero al parecer ya no se usa, o es una tabla temporal."
+            ],
+            "metadata": {
+                "language": "sql",
+                "azdata_cell_guid": "b03e1449-9a55-4ba6-b3c3-75a737ea94c0"
+            },
+            "attachments": {}
+        },
+        {
+            "cell_type": "code",
+            "source": [
+                "SELECT * FROM EtiCounters"
+            ],
+            "metadata": {
+                "azdata_cell_guid": "103374e1-a583-42f5-bf3b-b3c19ba7debc",
+                "language": "sql",
+                "tags": [
+                    "hide_input"
+                ]
+            },
+            "outputs": [],
+            "execution_count": null
+        },
+        {
+            "cell_type": "markdown",
+            "source": [
+                "> **dbo.PointOfUseEtis** Se almacena la informacion de carga de ETIs en los tuneles por periodo de tiempo. Se utiliza para trazabilidad."
+            ],
+            "metadata": {
+                "language": "sql",
+                "azdata_cell_guid": "7784d985-81d7-42ef-bb82-29f699ecc84b"
+            },
+            "attachments": {}
+        },
+        {
+            "cell_type": "code",
+            "source": [
+                "SELECT * FROM PointOfUseEtis"
+            ],
+            "metadata": {
+                "azdata_cell_guid": "9e062042-a36d-4574-9934-61fae728c91b",
+                "language": "sql",
+                "tags": [
+                    "hide_input"
+                ]
+            },
+            "outputs": [],
+            "execution_count": null
+        },
+        {
+            "cell_type": "markdown",
+            "source": [
+                "> **dbo.LineProcesses** Relacion de procesos validos por linea."
+            ],
+            "metadata": {
+                "language": "sql",
+                "azdata_cell_guid": "4f83e459-d5e7-482a-84d4-0f96ea57cc9b"
+            },
+            "attachments": {}
+        },
+        {
+            "cell_type": "code",
+            "source": [
+                "SELECT * FROM LineProcesses"
+            ],
+            "metadata": {
+                "azdata_cell_guid": "78f65c07-fb50-464b-b6a9-c5289f85de25",
+                "language": "sql",
+                "tags": [
+                    "hide_input"
+                ]
+            },
+            "outputs": [],
+            "execution_count": null
+        },
+        {
+            "cell_type": "markdown",
+            "source": [
+                "> **dbo.LinePointsOfUse** Relacion de tuneles en linea. CREO que ya no se utiliza por que la funcionalidad se reemplaza con la tabla LineRouting."
+            ],
+            "metadata": {
+                "language": "sql",
+                "azdata_cell_guid": "35f95cc5-f10e-48ae-9691-d3b033c7e3ae"
+            },
+            "attachments": {}
+        },
+        {
+            "cell_type": "code",
+            "source": [
+                "SELECT * FROM LinePointsOfUse"
+            ],
+            "metadata": {
+                "azdata_cell_guid": "3553d2f7-70a5-491a-bb77-7b054874f6b6",
+                "language": "sql",
+                "tags": [
+                    "hide_input"
+                ]
+            },
+            "outputs": [],
+            "execution_count": null
+        },
+        {
+            "cell_type": "markdown",
+            "source": [
+                "> **dbo.LineProcessPointOfUse** Relacion de tuneles por cada proceso de una linea. Se utiliza para la trazabilidad."
+            ],
+            "metadata": {
+                "language": "sql",
+                "azdata_cell_guid": "83f5506e-76a1-436d-bfea-aa80b82f87d3"
+            },
+            "attachments": {}
+        },
+        {
+            "cell_type": "code",
+            "source": [
+                "SELECT * FROM LineProcessPointsOfUse"
+            ],
+            "metadata": {
+                "azdata_cell_guid": "91577af9-66c8-4b0f-b97e-78c23fad6f7c",
+                "language": "sql",
+                "tags": [
+                    "hide_input"
+                ]
+            },
+            "outputs": [],
+            "execution_count": null
+        },
+        {
+            "cell_type": "markdown",
+            "source": [
+                "## Informacion adicional de la BD GTT\n",
+                "\n",
+                "### **Vistas**\n",
+                "\n",
+                "- **dbo.GlobalSettings** Tabla con informacion general, como el codigo de cliente para CEGID y la zona horaria (que debido al desfase de dos horas del servidor tengo que utilizar formato UTC, que es lo recomendado de igual manera).\n",
+                "\n",
+                "### **Procedimientos**\n",
+                "\n",
+                "- **cegid.usp\\_update\\_bom** Utilizado para actualizar la informacion de las tablas dbo.bom y dbo.gamma desde CEGID.\n",
+                "- **dbo.UspSetLineHeadcount** Se actualiza el la cantidad de personal por linea, invalidando la cantidad anteriormente asignada. De momento esto se hace desde la pantalla de empaque de la version 2 y se utiliza unicamente el ultimo valor introducido para calcular el PPH, aunque bien podria utilizarse para calcular el PPH por pieza (variando la cantidad de personal en el turno).\n",
+                "- **dbo.UspUpdateGamma** Actualiza la informacion de la gamma desde CEGID para la tabla _dbo.Gammas_.\n",
+                "- **dbo.UspUpdateLineGamma** Actualiza la informacion de la gamma para una linea y su programacion. La informacion se toma de _dbo.Gammas_.\n",
+                "\n",
+                "### **Funciones**\n",
+                "\n",
+                "- **dbo.UfnToLocalTime** Convierte un valor DateTime en horario universal al horario local de acuerdo al valor en la tabla _dbo.GlobalSettings_.\n",
+                "- **dbo.UfnToUniversalTime** Convierte un valor DateTime en horario local de acuerdo al valor en la tabla _dbo.GlobalSettings_ a horario universal.\n",
+                "- **cegid.ufn\\_bom** Obtiene el BoM para un numero de parte y revision desde CEGID.\n",
+                "- **dbo.UfnLineCurrentHourProduction** Devuelve algunas estadisticas de produccion para la hora actual.\n",
+                "- **dbo.UfnLinePerformanceReport** Devuelve informacion sobre el rendimiento de las lineas al momento.\n",
+                "- **dbo.UfnLineScheduledRequirement** Devuelve el requerimiento por hora de una linea.\n",
+                "- **dbo.UfnLineShift** Devuelve informacion de un turno adecuado al momento actual.\n",
+                "- **dbo.UfnLineShiftHeadcount** Extiende la informacion de dbo.UtnLineShift con la informacion del total de personal.\n",
+                "- **dbo.UfnProductionReport** Informacion de produccion hora por hora.\n",
+                "- **dbo.UfnProductionTimeIntervals** Devuelve la informacion de produccion hora por hora para una linea.\n",
+                "- **dbo.UfnUnitComponentsTrazability** Trazabilidad de componentes por unidad."
+            ],
+            "metadata": {
+                "language": "sql",
+                "azdata_cell_guid": "a22c6a84-643e-4205-bc72-45ab17d67f6d"
+            },
+            "attachments": {}
+        },
+        {
+            "cell_type": "markdown",
+            "source": [
+                "# QUERYS de utilidad"
+            ],
+            "metadata": {
+                "language": "sql",
+                "azdata_cell_guid": "8b290ca1-64d7-40ca-af16-4d3947b2e6d3"
+            },
+            "attachments": {}
+        },
+        {
+            "cell_type": "code",
+            "source": [
+                "--Rogelio ARRIAGA at 11/22/2022 5:45 PM\r\n",
+                "--Server: MXSRVTRACA\r\n",
+                "--DB: TRAZAB\r\n",
+                "----Funcion: Este QWERY sirvio para ayudar al Ing Abel Snachez para poder buscar X lotes con X componente en X linea\r\n",
+                "--QWERY\r\n",
+                "--Rogelio ARRIAGA at 11/22/2022 5:45 PM\r\n",
+                "select * FROM Etis_WB where NP_FINAL LIKE ('%85256-10%') and component like ('00387') ORDER BY creation_time ASC\r\n",
+                "\r\n",
+                ""
+            ],
+            "metadata": {
+                "language": "sql",
+                "azdata_cell_guid": "4f765bbd-d1c4-4c20-95c1-ffc5809f3811",
+                "tags": []
+            },
+            "outputs": [],
+            "execution_count": null
+        },
+        {
+            "cell_type": "code",
+            "source": [
+                "--Rogelio ARRIAGA at 11/22/2022 5:49 PM\r\n",
+                "--Server: N/A\r\n",
+                "--DB: N/A\r\n",
+                "----Funcion: Este Query muestra como datos en una tabla todas las tablas dentro de una base de datos, util para saber todas las tablas y consultar facilmente \r\n",
+                "--QWERY\r\n",
+                "\r\n",
+                "SELECT CAST(table_name as varchar)  FROM INFORMATION_SCHEMA.TABLES"
+            ],
+            "metadata": {
+                "language": "sql",
+                "azdata_cell_guid": "6d48f331-bc43-4b65-ac22-5c22d7b3b6a0",
+                "tags": []
+            },
+            "outputs": [],
+            "execution_count": null
+        },
+        {
+            "cell_type": "markdown",
+            "source": [
+                "# QWERYS que dejo el Ing.Marcos V"
+            ],
+            "metadata": {
+                "language": "sql",
+                "azdata_cell_guid": "79bf6f7a-0634-42ce-aadd-f4e67c1681a7"
+            },
+            "attachments": {}
+        },
+        {
+            "cell_type": "code",
+            "source": [
+                "--Server: MXSRVTRACA\r\n",
+                "--DB: TRAZAB\r\n",
+                "--Descripción: Muestra estatus de las líneas\r\n",
+                "\r\n",
+                "--QUERY: \r\n",
+                "\r\n",
+                "with t as (\r\n",
+                "    select l.letter [line], l.comments [line_code], p.part_number, p.rev, count(b.i) [gama_size]\r\n",
+                "    from apps.dbo.pro_prod_units l\r\n",
+                "    join apps.dbo.pro_production p\r\n",
+                "        on p.codew=l.codew and p.is_running=1 and p.is_stoped=0\r\n",
+                "    left join cegid.bom b\r\n",
+                "        on b.NOKTCODPF=dbo.ufn_get_plain_part_no(rtrim(p.part_number)) and b.NOKTCOMPF=l.letter\r\n",
+                "    group by l.letter, l.comments, p.part_number, p.rev\r\n",
+                ")\r\n",
+                "select * from t\r\n",
+                "cross apply (\r\n",
+                "    select count(*)\r\n",
+                "    from dbo.Etis_WB with (nolock)\r\n",
+                "    where [status]=0 and linea=t.line_code\r\n",
+                ")z(active_set_size);\r\n",
+                "\r\n",
+                "--Server: MXSRVTRACA"
+            ],
+            "metadata": {
+                "language": "sql",
+                "azdata_cell_guid": "28108a50-f2d6-47b9-8f49-509ffc6cb3ef"
+            },
+            "outputs": [],
+            "execution_count": null
+        },
+        {
+            "cell_type": "code",
+            "source": [
+                "--Server: MXSRVTRACA\r\n",
+                "--DB: TRAZAB\r\n",
+                "--Descripción: From master to pallet\r\n",
+                "\r\n",
+                "--QUERY: \r\n",
+                "\r\n",
+                "DECLARE\r\n",
+                "    @master_id BIGINT = 41771;\r\n",
+                "DECLARE @part_no VARCHAR(50), @line_name NVARCHAR(50);\r\n",
+                "SELECT @part_no = part_num, @line_name = line FROM Master_labels_WB WHERE id = @master_id;\r\n",
+                "SELECT '@part_no'=@part_no, '@line_name'=@line_name;\r\n",
+                "RETURN;\r\n",
+                "IF EXISTS(SELECT * FROM dbo.Temp_pack_WB WHERE linea=@line_name AND num_p=@part_no)\r\n",
+                "BEGIN\r\n",
+                "    BEGIN TRANSACTION;\r\n",
+                "    WITH t AS (\r\n",
+                "        SELECT TOP 1 * FROM dbo.Temp_pack_WB WHERE linea=@line_name AND num_p=@part_no\r\n",
+                "    )\r\n",
+                "    INSERT INTO dbo.Temp_pack_WB(linea, modelo, telesis, fecha, num_p, [LEVEL], IS_partial, Master_id, Aproved)\r\n",
+                "    SELECT t.linea, t.modelo, x.TM_id, ISNULL(x.pack_time, GETDATE()), t.num_p, t.[LEVEL], t.IS_partial, t.Master_id, t.Aproved FROM t\r\n",
+                "    JOIN dbo.Master_lbl_TMid x ON x.Master_id = @master_id;\r\n",
+                "    DELETE FROM dbo.Master_lbl_TMid WHERE Master_id=@master_id;\r\n",
+                "    UPDATE Master_labels_WB SET is_active=0, qty=0 WHERE id=@master_id;\r\n",
+                "    ROLLBACK; -- <<<<<<<<<<<<<<<<< COMMIT;\r\n",
+                "    PRINT 'OK';\r\n",
+                "END\r\n",
+                "--select * from dbo.Temp_pack_WB where linea='wb lp' and num_p='85658'"
+            ],
+            "metadata": {
+                "language": "sql",
+                "azdata_cell_guid": "0c083cf2-788f-45e6-b0ac-af64e8873be4"
+            },
+            "outputs": [],
+            "execution_count": null
+        },
+        {
+            "cell_type": "code",
+            "source": [
+                "--Server: MXSRVTRACA\r\n",
+                "--DB: TRAZAB\r\n",
+                "--Descripción: Change over rider\r\n",
+                "\r\n",
+                "--QUERY: \r\n",
+                "\r\n",
+                "DECLARE\r\n",
+                "    @COMPANY_CODE INT = 300,\r\n",
+                "    @DISABLED INT = 17,\r\n",
+                "    @GAMMA NVARCHAR(50) = 'LD',\r\n",
+                "    @cur_part_no NVARCHAR(50) = 'GT87140',\r\n",
+                "    @new_part_no NVARCHAR(50) = '87129',\r\n",
+                "    @cur_model_no NVARCHAR(50) = 'GTUSA0',\r\n",
+                "    @full_line_code NVARCHAR(50) = 'RIDER LE';\r\n",
+                "--UPDATE APPS.dbo.pro_prod_units SET modelo = @model_no WHERE letter = RIGHT(@line_code, 2);\r\n",
+                "WITH cur_bom AS (\r\n",
+                "    SELECT ROW_NUMBER() OVER(PARTITION BY NOCTCODECP ORDER BY NOCTCODECP) i, *\r\n",
+                "    FROM MXSRVCEGID.PMI.dbo.NOMENC a WITH(NOLOCK)\r\n",
+                "    JOIN MXSRVCEGID.PMI.dbo.ARTICLE art\r\n",
+                "        ON art.ARKTSOC = a.NOKTSOC AND art.ARKTCODART = a.NOCTCODECP AND art.ARKTCOMART = a.NOCTCOMCPT AND art.ARCTCODFAM IN ('CMP','PMQ','PM', 'DIV') AND art.ARCTFATN != @DISABLED\r\n",
+                "    WHERE a.NOKTSOC = @COMPANY_CODE\r\n",
+                "    AND a.NOKTCOMPF = @GAMMA\r\n",
+                "    AND a.NOKTCODPF = @cur_part_no\r\n",
+                "), new_bom AS (\r\n",
+                "    SELECT ROW_NUMBER() OVER(PARTITION BY NOCTCODECP ORDER BY NOCTCODECP) i, *\r\n",
+                "    FROM MXSRVCEGID.PMI.dbo.NOMENC a WITH(NOLOCK)\r\n",
+                "    JOIN MXSRVCEGID.PMI.dbo.ARTICLE art\r\n",
+                "        ON art.ARKTSOC = a.NOKTSOC AND art.ARKTCODART = a.NOCTCODECP AND art.ARKTCOMART = a.NOCTCOMCPT AND art.ARCTCODFAM IN ('CMP','PMQ','PM', 'DIV') AND art.ARCTFATN != @DISABLED\r\n",
+                "    WHERE a.NOKTSOC = @COMPANY_CODE\r\n",
+                "    AND a.NOKTCOMPF = @GAMMA\r\n",
+                "    AND a.NOKTCODPF = @new_part_no\r\n",
+                ")\r\n",
+                "--UPDATE t SET t.eti_status = 1\r\n",
+                "SELECT c.NOCTCODECP, c.NOCTCOMCPT\r\n",
+                "FROM cur_bom c\r\n",
+                "LEFT JOIN new_bom n\r\n",
+                "    ON n.i = c.i AND n.NOCTCODECP = c.NOCTCODECP AND n.NOCTCOMCPT = c.NOCTCOMCPT\r\n",
+                "JOIN dbo.trazab_rider t\r\n",
+                "    ON t.eti_status = 0\r\n",
+                "    AND LTRIM(RTRIM(c.NOCTCODECP)) = t.component_number COLLATE French_CI_AS\r\n",
+                "    AND LTRIM(RTRIM(c.NOCTCOMCPT)) = t.cmp_rev COLLATE French_CI_AS\r\n",
+                "    AND t.NP_FINAL = @cur_part_no AND t.modelo = @cur_model_no AND t.linea = @full_line_code\r\n",
+                "WHERE n.NOCTCODECP IS NULL;\r\n",
+                "--select * from Trazab_Rider where eti_status=0 and modelo='GTUSA0' and linea='rider le' and component_number<>'' and NP_FINAL='GT87140'\r\n",
+                ""
+            ],
+            "metadata": {
+                "language": "sql",
+                "azdata_cell_guid": "4f2690ea-b38f-4cd6-80da-0d15de7d2b73"
+            },
+            "outputs": [],
+            "execution_count": null
+        },
+        {
+            "cell_type": "code",
+            "source": [
+                "--Server: MXSRVTRACA\r\n",
+                "--DB: TRAZAB\r\n",
+                "--Descripción: Componentes para retorno\r\n",
+                " \r\n",
+                "--QUERY: \r\n",
+                "\r\n",
+                "with t as (\r\n",
+                "    select SeqNo, CompNo, CompRev, PointOfUse from cegid.ufn_bom('84915', 'LH')\r\n",
+                "    except\r\n",
+                "    select SeqNo, CompNo, CompRev, PointOfUse from cegid.ufn_bom('85618', 'LH')\r\n",
+                ")\r\n",
+                "select * from t join Etis_WB e on e.linea='WB LH' and [status]=0 and e.component=t.CompNo and e.rev_cc = t.CompRev and e.puesto_no=t.PointOfUse;"
+            ],
+            "metadata": {
+                "language": "sql",
+                "azdata_cell_guid": "aee82531-0692-46e7-b118-69ad6f1cc3bb"
+            },
+            "outputs": [],
+            "execution_count": null
+        },
+        {
+            "cell_type": "code",
+            "source": [
+                "--Server: MXSRVTRACA\r\n",
+                "--DB: TRAZAB\r\n",
+                "--Descripción: Componentes que se perdieron en la P (Cuidado con el UPDATE)\r\n",
+                " \r\n",
+                "--QUERY:\r\n",
+                "\r\n",
+                "select * from cegid.bom where NOKTCODPF='85621-10' and NOKTCOMPF='LP' and NOCTCODOPE='P15'\r\n",
+                "select top 100 * from etis_wb where linea='wb lp' and puesto_no='p15' and fecha='10-Nov-2021' and component='36385' order by SET_ID desc\r\n",
+                "update Etis_WB set [status]=0 where id=3664463\r\n",
+                ""
+            ],
+            "metadata": {
+                "language": "sql",
+                "azdata_cell_guid": "0bdf0e57-aaec-4a16-8d71-33152257b8f3"
+            },
+            "outputs": [],
+            "execution_count": null
+        },
+        {
+            "cell_type": "code",
+            "source": [
+                "--Server: ???\r\n",
+                "--DB: ???\r\n",
+                "--Descripción: Consultar líneas de producción (Server y DB desconocidos aun)\r\n",
+                " \r\n",
+                "--QUERY: \r\n",
+                "\r\n",
+                "DECLARE @linea NVARCHAR(50) = 'WB LE', @NP nvarchar(50) = '';\r\n",
+                "SELECT * FROM dbo.pro_prod_units WHERE comments = @linea;\r\n",
+                "select * from pro_production where id_line = 19 and is_running=1 and is_stoped = 0 and is_finished = 0;\r\n",
+                ""
+            ],
+            "metadata": {
+                "language": "sql",
+                "azdata_cell_guid": "b8f3dc03-2251-4c30-82dc-b7ebb37a2b88"
+            },
+            "outputs": [],
+            "execution_count": null
+        },
+        {
+            "cell_type": "code",
+            "source": [
+                "--Server: MXSRVCEGID\r\n",
+                "--DB: PMI\r\n",
+                "--Descripción: solamente consulta clientes\r\n",
+                " \r\n",
+                "--QUERY: \r\n",
+                "\r\n",
+                "SELECT\r\n",
+                "    CLKTCODE [ClientId],\r\n",
+                "    CLCTABRE [ClientCode],\r\n",
+                "    CLCTNOM [ClientName]\r\n",
+                "FROM CLIENT\r\n",
+                "WHERE CLKTSOC = 300 AND CLKTCODE = 150227;"
+            ],
+            "metadata": {
+                "language": "sql",
+                "azdata_cell_guid": "c03ef9e0-d8e6-4075-b342-989dd9482960"
+            },
+            "outputs": [],
+            "execution_count": null
+        },
+        {
+            "cell_type": "code",
+            "source": [
+                "--Server: MXSRVTRACA\r\n",
+                "--DB: TRAZAB\r\n",
+                "--Descripción: Fix P Sets (PENDIENTE REVISAR SU FUNCIONAMIENTO CUIDADO CON EL DELATE)\r\n",
+                " \r\n",
+                "--QUERY: \r\n",
+                "\r\n",
+                "\r\n",
+                "--Borrar el comentario largo para usarlo osea los /* */\r\n",
+                "\r\n",
+                "/*Borrar esta linea para usar el quwery\r\n",
+                "\r\n",
+                "with t as (\r\n",
+                "    select row_number() over(partition by puesto_no, component, rev_cc order by id desc) i, * from Etis_WB where linea='wb lp' and [status]=0 and SET_ID like 'lp2%'\r\n",
+                ")\r\n",
+                "delete e\r\n",
+                "from t\r\n",
+                "join etis_wb e on e.id = t.id\r\n",
+                "where i > 1;\r\n",
+                "select * from Etis_WB where linea='wb lp' and [status]=0\r\n",
+                "\r\n",
+                "Borrar esta linea para usar el quwery */\r\n",
+                ""
+            ],
+            "metadata": {
+                "language": "sql",
+                "azdata_cell_guid": "ccf9af4a-c2d2-4dbf-870c-7a34e2803071"
+            },
+            "outputs": [],
+            "execution_count": null
+        },
+        {
+            "cell_type": "code",
+            "source": [
+                "--Server: MXSRVTRACA\r\n",
+                "--DB: TRAZAB\r\n",
+                "--Descripción: Muestra material cargado\r\n",
+                "\r\n",
+                "--QUERY: \r\n",
+                "\r\n",
+                "select\r\n",
+                "    t.linea, t.eti_no, t.Punto_uso, ISNULL(se.qty, ISNULL(e.qty, ISNULL(tr.qty, -1))) [BinSize]\r\n",
+                "from dbo.Tbl_Point_use t with(nolock)\r\n",
+                "LEFT JOIN dbo.pro_subeti se\r\n",
+                "    ON LEFT(t.eti_no, 2) = 'es' AND ISNUMERIC(RIGHT(t.eti_no, LEN(t.eti_no) - 2)) = 1\r\n",
+                "    AND se.NP1 = t.Componente AND CAST(se.id AS VARCHAR(50)) = RIGHT(t.eti_no, LEN(t.eti_no) - 2)\r\n",
+                "LEFT JOIN apps.dbo.wh_eti001_transfer tr WITH(NOLOCK)\r\n",
+                "    ON LEFT(t.eti_no, 1) = 'e' AND CHARINDEX('-t', t.eti_no) > 0\r\n",
+                "    AND CAST(tr.id AS VARCHAR(50)) = RIGHT(t.eti_no, LEN(t.eti_no) - CHARINDEX('-t', t.eti_no) - 1)\r\n",
+                "LEFT JOIN apps.dbo.pro_eti001 e WITH(NOLOCK)\r\n",
+                "    ON LEFT(t.eti_no, 1) = 'E' AND CHARINDEX('-', t.eti_no) = 0\r\n",
+                "    AND e.part_number = t.Componente AND ISNUMERIC(RIGHT(t.eti_no, LEN(t.eti_no) - 1)) = 1 AND CAST(e.id AS VARCHAR(50)) = RIGHT(t.eti_no, LEN(t.eti_no) - 1)\r\n",
+                "where t.is_used=0 and LEFT(t.Punto_uso, 2) != 'BM'\r\n",
+                "order by t.linea, t.Punto_uso;"
+            ],
+            "metadata": {
+                "language": "sql",
+                "azdata_cell_guid": "45411873-d3d7-4071-b8b3-2e4a582dd71d"
+            },
+            "outputs": [],
+            "execution_count": null
+        },
+        {
+            "cell_type": "code",
+            "source": [
+                "--Server: MXSRVTRACA\r\n",
+                "--DB: TRAZAB\r\n",
+                "--Descripción: Status gamma all\r\n",
+                "\r\n",
+                "--QUERY:\r\n",
+                "\r\n",
+                "DECLARE @line NVARCHAR(50) = 'LB', @workday DATE = DATEADD(DAY, 0, GETDATE());\r\n",
+                "-- get line schedule data\r\n",
+                "WITH line_settings (line_id, line_code, moment, part_no, codew) AS (\r\n",
+                "    SELECT id, letter, CAST(FORMAT(@workday, 'yyyyMMdd') + ' 12:06:01' AS DATETIME), modelo, codew\r\n",
+                "    FROM APPS.dbo.pro_prod_units WITH(NOLOCK)\r\n",
+                "    --WHERE letter = @line\r\n",
+                "), schedule (model_no, codew, part_no, line_id, line_code, moment, effective_time, expiration_time) AS (\r\n",
+                "    SELECT client_name, s.codew, s.part_no, s.line_id, s.line_code, s.moment, start_date, ISNULL(end_at, s.moment)\r\n",
+                "    FROM line_settings s\r\n",
+                "    JOIN APPS.dbo.pro_production wo WITH(NOLOCK)\r\n",
+                "        ON wo.id_line = s.line_id AND s.part_no = wo.part_number AND s.codew = wo.codew\r\n",
+                "        AND wo.start_date <= s.moment AND (wo.end_at IS NULL OR s.moment < wo.end_at)\r\n",
+                ")\r\n",
+                "SELECT\r\n",
+                "    bom.NOKTCOMPF [line],\r\n",
+                "    bom.NOKTCODPF [part_no],\r\n",
+                "    effective_time, expiration_time,\r\n",
+                "    CASE WHEN SUM(CASE WHEN pu.Id IS NULL THEN 0 ELSE 1 END + CASE WHEN eti.eti_no IS NULL THEN 0 ELSE 1 END) > 0 THEN 1 ELSE 0 END [is_ready]\r\n",
+                "FROM schedule s \r\n",
+                "JOIN TRAZAB.cegid.bom WITH(NOLOCK)\r\n",
+                "    ON bom.NOKTCODPF  = s.part_no\r\n",
+                "    AND bom.NOKTCOMPF = s.line_code\r\n",
+                "LEFT JOIN TRAZAB.dbo.tbl_Point_use pu WITH(NOLOCK)\r\n",
+                "    ON pu.linea       = bom.NOKTCOMPF\r\n",
+                "    AND pu.NP_final   = bom.NOKTCODPF\r\n",
+                "    AND pu.Punto_uso  = bom.NOCTCODOPE\r\n",
+                "    AND pu.Componente = bom.NOCTCODECP\r\n",
+                "    AND pu.is_used    = 0\r\n",
+                "LEFT JOIN TRAZAB.dbo.Etis_WB eti WITH(NOLOCK)\r\n",
+                "    ON eti.status     = 0\r\n",
+                "    AND eti.MODELO    = s.model_no\r\n",
+                "    AND eti.component = bom.NOCTCODECP\r\n",
+                "    AND s.line_code   = bom.NOKTCOMPF\r\n",
+                "    AND eti.NP_FINAL  = bom.NOKTCODPF\r\n",
+                "GROUP BY bom.NOKTCOMPF, bom.NOKTCODPF, effective_time, expiration_time\r\n",
+                "ORDER BY line;\r\n",
+                ""
+            ],
+            "metadata": {
+                "language": "sql",
+                "azdata_cell_guid": "44fa448c-27b2-4fa8-9887-77c4c772ed09"
+            },
+            "outputs": [],
+            "execution_count": null
+        },
+        {
+            "cell_type": "code",
+            "source": [
+                "--Server: MXSRVTRACA\r\n",
+                "--DB: TRAZAB\r\n",
+                "--Descripción: Checar Bom (Pendiente de ver a detalle, ya que hace un insert en X tabla y hay que validar que no afecte nada de eso al proceso de la línea actual que está corriendo)\r\n",
+                " \r\n",
+                "--QUERY: \r\n",
+                "\r\n",
+                "USE PMI;\r\n",
+                "GO\r\n",
+                "DECLARE\r\n",
+                "    @part_no NVARCHAR(50) = '85621-REAR',\r\n",
+                "    @line_code NVARCHAR(50) = 'LQ';\r\n",
+                "DECLARE\r\n",
+                "    @GTMEX INT = 300,\r\n",
+                "    @EMPTY_STRING NVARCHAR(50) = '' ,\r\n",
+                "    @COMPRADO NVARCHAR(50) = 'CMP',\r\n",
+                "    @MAQUINADO NVARCHAR(50) = 'PMQ',\r\n",
+                "    @MOLDEADO NVARCHAR(50) = 'PM',\r\n",
+                "    @DIVERSOS NVARCHAR(50) = 'DIV',\r\n",
+                "    @ACE NVARCHAR(50) = 'ACE';\r\n",
+                "DECLARE @FAMILIAS TABLE(CODE NVARCHAR(50) COLLATE French_CS_AS_KS_WS);\r\n",
+                "INSERT INTO @FAMILIAS VALUES(@COMPRADO),(@MAQUINADO),(@MOLDEADO),(@DIVERSOS),(@ACE);\r\n",
+                "SELECT DISTINCT T1.NOCTCODECP, T1.NOCTCOMCPT, T1.NOCTCODOPE, T1.NOCTTYPOPE, T2.ARCTCODFAM, T2.ARITNATURE, T3.ARKCRITPAR, T3.APKSTDPACK\r\n",
+                "From NOMENC T1\r\n",
+                "RIGHT JOIN UARTICLE T3 ON (T1.NOCTCODECP=T3.ARKTCODART AND T1.NOCTCOMCPT=T3.ARKTCOMART)\r\n",
+                "LEFT JOIN ARTICLE T2 ON (T1.NOCTCODECP=T2.ARKTCODART AND (T1.NOCTCOMCPT=T2.ARCTCODPLA OR T1.NOCTCOMCPT=T2.ARKTCOMART))\r\n",
+                "WHERE (T1.NOCTCODOPE<>@EMPTY_STRING AND T1.NOCTTYPOPE<>@EMPTY_STRING) AND T2.ARCTCODFAM IN (SELECT CODE FROM @FAMILIAS)\r\n",
+                "AND T2.ARKTSOC=@GTMEX AND T1.NOKTCODPF=@part_no AND T1.NOKTCOMPF=@line_code;\r\n",
+                ""
+            ],
+            "metadata": {
+                "language": "sql",
+                "azdata_cell_guid": "83775637-7f39-40e4-af9a-f77518f0ba35"
+            },
+            "outputs": [],
+            "execution_count": null
+        },
+        {
+            "cell_type": "code",
+            "source": [
+                "--Server: MXSRVTRACA\r\n",
+                "--DB: TRAZAB\r\n",
+                "--Descripción: Componentes x puntos de uso duplicados por linea\r\n",
+                " \r\n",
+                "--QUERY: \r\n",
+                "\r\n",
+                "use TRAZAB;\r\n",
+                "GO\r\n",
+                "select distinct linea, SET_ID /*, component, puesto_no*/, count(*) from dbo.Etis_WB with (nolock)\r\n",
+                "where [status]=0\r\n",
+                "group by linea, set_id, component, puesto_no\r\n",
+                "having count(*) > 1;\r\n",
+                "\r\n",
+                "--select * from Etis_WB where linea='WB LH' and [status]=0"
+            ],
+            "metadata": {
+                "language": "sql",
+                "azdata_cell_guid": "4660097d-0736-464d-8f65-1495c52a7f4c"
+            },
+            "outputs": [],
+            "execution_count": null
+        },
+        {
+            "cell_type": "code",
+            "source": [
+                "--Server: MXSRVTRACA\r\n",
+                "--DB: TRAZAB\r\n",
+                "--Descripción: Corrección duplicados LP v2\r\n",
+                " \r\n",
+                "--QUERY: \r\n",
+                "\r\n",
+                "with t as (\r\n",
+                "    select e.id, e.puesto_no, e.component, ROW_NUMBER() over(partition by bom.compno, bom.pointofuse order by e.id desc) i\r\n",
+                "    from cegid.ufn_bom('85621-10', 'LP') bom\r\n",
+                "    join Etis_WB e with(nolock)\r\n",
+                "        on [status]=0 and linea='WB LP' and NP_FINAL='85621-10'\r\n",
+                "        and e.puesto_no=bom.PointOfUse and e.component=bom.CompNo\r\n",
+                ")\r\n",
+                "--select *\r\n",
+                "update e set e.[status]=1\r\n",
+                "from t\r\n",
+                "join Etis_WB e on [status]=0 and linea='WB LP' and NP_FINAL='85621-10' and e.id=t.id\r\n",
+                "where i >  1;\r\n",
+                ""
+            ],
+            "metadata": {
+                "language": "sql",
+                "azdata_cell_guid": "fa9cc983-a68b-47fa-86b4-426f301bad3e"
+            },
+            "outputs": [],
+            "execution_count": null
+        },
+        {
+            "cell_type": "code",
+            "source": [
+                "--Server: MXSRVTRACA\r\n",
+                "--DB: TRAZAB\r\n",
+                "--Descripción: Extract from master label to another (Solamente eso decía PENDIENTE INVESTIGAR MAS SOBRE SU FUNCION, CUIDADO CON LOS UPDATE)\r\n",
+                " \r\n",
+                "--QUERY: \r\n",
+                "\r\n",
+                "DECLARE\r\n",
+                "    @source BIGINT = 38645,\r\n",
+                "    @target BIGINT = 38664;\r\n",
+                "BEGIN TRANSACTION;\r\n",
+                "UPDATE dbo.Master_labels_WB SET qty = qty + (SELECT qty FROM dbo.Master_labels_WB WHERE Id = @source) WHERE Id = @target;\r\n",
+                "UPDATE dbo.Master_labels_WB SET qty = 0, is_active = 0 WHERE Id = @source;\r\n",
+                "UPDATE dbo.Master_lbl_TMid SET Master_id = @target WHERE Master_id = @source;\r\n",
+                "ROLLBACK;\r\n",
+                "--COMMIT;"
+            ],
+            "metadata": {
+                "language": "sql",
+                "azdata_cell_guid": "69135a97-0a95-4537-92e7-3fa01ab2334b"
+            },
+            "outputs": [],
+            "execution_count": null
+        },
+        {
+            "cell_type": "code",
+            "source": [
+                "--Server: MXSRVTRACA\r\n",
+                "--DB: TRAZAB\r\n",
+                "--Descripción: Lotes usados por semana\r\n",
+                " \r\n",
+                "--QUERY: \r\n",
+                "\r\n",
+                "SET DATEFIRST 1;\r\n",
+                "SELECT e.linea, e.eti_no, e.component, e.lote, c.bin_size, MIN(creation_time) fecha\r\n",
+                "FROM dbo.Etis_WB e WITH(NOLOCK)\r\n",
+                "LEFT JOIN dbo.eti_packing_counters c WITH(NOLOCK)\r\n",
+                "    ON c.eti_no = e.eti_no\r\n",
+                "WHERE DATEPART(WEEK, e.creation_time) = DATEPART(WEEK, GETDATE()) - 1\r\n",
+                "AND (e.component = '33088' OR e.component = '33109' OR e.component = '33106')\r\n",
+                "GROUP BY e.linea, e.eti_no, e.component, e.lote, c.bin_size\r\n",
+                "ORDER BY fecha;"
+            ],
+            "metadata": {
+                "language": "sql",
+                "azdata_cell_guid": "319f042e-b26b-4828-a172-e9cd38bb4295"
+            },
+            "outputs": [],
+            "execution_count": null
+        },
+        {
+            "cell_type": "markdown",
+            "source": [
+                "# SUPER QWERYS!!!"
+            ],
+            "metadata": {
+                "language": "sql",
+                "azdata_cell_guid": "22079a40-838e-4b9a-8d85-9ca5151a8c59"
+            },
+            "attachments": {}
+        },
+        {
+            "cell_type": "code",
+            "source": [
+                "-- Creacion de archivo de entidad\r\n",
+                "--Este codigo crea las entidades que uso el ing marco en el codigo de GT Trace v2\r\n",
+                "--ESTO ES IMPORTANTE PARA DESAROLLO!!!\r\n",
+                "\r\n",
+                "--En donde dice DECLARE y eso, lo que esta entre las comillas simples --> '' ahi se pone el nombre de la tablaa la que se le quiere sacar la entidad para el software.\r\n",
+                "--Recomendable copiar y pegar en una nueva pestaña, para poder ver el resultado de mejor manera.\r\n",
+                "\r\n",
+                "DECLARE @TableName sysname = 'PointOfUseEtis';\r\n",
+                "SELECT\r\n",
+                "    @TableName = name\r\n",
+                "FROM sys.tables\r\n",
+                "WHERE name = @TableName;\r\n",
+                "DECLARE @Result VARCHAR(MAX) = 'public class ' + @TableName + '\r\n",
+                "{';\r\n",
+                "SELECT @Result = @Result + '\r\n",
+                "public ' + ColumnType + NullableSign + ' ' + ColumnName + ' { get; set; }\r\n",
+                "'\r\n",
+                "FROM ( SELECT REPLACE(col.name, ' ', '_') ColumnName ,\r\n",
+                "column_id ColumnId ,\r\n",
+                "CASE typ.name\r\n",
+                "WHEN 'bigint' THEN 'long'\r\n",
+                "WHEN 'binary' THEN 'byte[]'\r\n",
+                "WHEN 'bit' THEN 'bool'\r\n",
+                "WHEN 'char' THEN 'string'\r\n",
+                "WHEN 'date' THEN 'DateTime'\r\n",
+                "WHEN 'datetime' THEN 'DateTime'\r\n",
+                "WHEN 'datetime2' THEN 'DateTime'\r\n",
+                "WHEN 'datetimeoffset' THEN 'DateTimeOffset'\r\n",
+                "WHEN 'decimal' THEN 'decimal'\r\n",
+                "WHEN 'float' THEN 'float'\r\n",
+                "WHEN 'image' THEN 'byte[]'\r\n",
+                "WHEN 'int' THEN 'int'\r\n",
+                "WHEN 'money' THEN 'decimal'\r\n",
+                "WHEN 'nchar' THEN 'string'\r\n",
+                "WHEN 'ntext' THEN 'string'\r\n",
+                "WHEN 'numeric' THEN 'decimal'\r\n",
+                "WHEN 'nvarchar' THEN 'string'\r\n",
+                "WHEN 'real' THEN 'double'\r\n",
+                "WHEN 'smalldatetime' THEN 'DateTime'\r\n",
+                "WHEN 'smallint' THEN 'short'\r\n",
+                "WHEN 'smallmoney' THEN 'decimal'\r\n",
+                "WHEN 'text' THEN 'string'\r\n",
+                "WHEN 'time' THEN 'TimeSpan'\r\n",
+                "WHEN 'timestamp' THEN 'DateTime'\r\n",
+                "WHEN 'tinyint' THEN 'byte'\r\n",
+                "WHEN 'uniqueidentifier' THEN 'Guid'\r\n",
+                "WHEN 'varbinary' THEN 'byte[]'\r\n",
+                "WHEN 'varchar' THEN 'string'\r\n",
+                "ELSE 'UNKNOWN_' + typ.name\r\n",
+                "END ColumnType ,\r\n",
+                "CASE WHEN col.is_nullable = 1\r\n",
+                "AND typ.name IN ( 'bigint', 'bit', 'date',\r\n",
+                "'datetime', 'datetime2',\r\n",
+                "'datetimeoffset', 'decimal',\r\n",
+                "'float', 'int', 'money',\r\n",
+                "'numeric', 'real',\r\n",
+                "'smalldatetime', 'smallint',\r\n",
+                "'smallmoney', 'time',\r\n",
+                "'tinyint', 'uniqueidentifier' )\r\n",
+                "THEN '?'\r\n",
+                "ELSE ''\r\n",
+                "END NullableSign\r\n",
+                "FROM sys.columns col\r\n",
+                "JOIN sys.types typ ON col.system_type_id = typ.system_type_id\r\n",
+                "AND col.user_type_id = typ.user_type_id\r\n",
+                "WHERE col.object_id = OBJECT_ID(@TableName)\r\n",
+                ") t\r\n",
+                "ORDER BY ColumnId;\r\n",
+                "SET @Result = @Result + '\r\n",
+                "}';\r\n",
+                "PRINT @Result;\r\n",
+                ""
+            ],
+            "metadata": {
+                "language": "sql",
+                "azdata_cell_guid": "84ddcf64-faff-424c-882a-e873fdb7ecc0"
+            },
+            "outputs": [
+                {
+                    "output_type": "display_data",
+                    "data": {
+                        "text/html": "public class PointOfUseEtis\r\n{\r\npublic long ID { get; set; }\r\n\r\npublic string PointOfUseCode { get; set; }\r\n\r\npublic string EtiNo { get; set; }\r\n\r\npublic string ComponentNo { get; set; }\r\n\r\npublic DateTime UtcEffectiveTime { get; set; }\r\n\r\npublic DateTime? UtcUsageTime { get; set; }\r\n\r\npublic DateTime? UtcExpirationTime { get; set; }\r\n\r\npublic bool IsDepleted { get; set; }\r\n\r\npublic string Comments { get; set; }\r\n\r\npublic string LotNo { get; set; }\r\n\r\n}"
+                    },
+                    "metadata": {}
+                },
+                {
+                    "output_type": "display_data",
+                    "data": {
+                        "text/html": "Total execution time: 00:00:00.034"
+                    },
+                    "metadata": {}
+                }
+            ],
+            "execution_count": 2
+        },
+        {
+            "cell_type": "code",
+            "source": [
+                "--Creacion de tablas mencionadas ahi!!\r\n",
+                "-- Este codigo crea las tablas mencionadas en el codigo\r\n",
+                "--ESTO ES IMPORTANTE PARA DESAROLLO!!!\r\n",
+                "--Todo esto se comenta para que no se cometa ningun error\r\n",
+                "/*\r\n",
+                "CREATE TABLE dbo.sites (\r\n",
+                "    site_code NVARCHAR(50) NOT NULL,\r\n",
+                "    is_enabled BIT DEFAULT(1) NOT NULL,\r\n",
+                "    CONSTRAINT PK_sites PRIMARY KEY(site_code)\r\n",
+                ");\r\n",
+                "CREATE TABLE dbo.parts (\r\n",
+                "    part_no NVARCHAR(50) NOT NULL,\r\n",
+                "    site_code NVARCHAR(50) NOT NULL,\r\n",
+                "    is_enabled BIT DEFAULT(1) NOT NULL,\r\n",
+                "    CONSTRAINT PK_parts PRIMARY KEY (part_no, site_code),\r\n",
+                "    CONSTRAINT FK_parts_sites FOREIGN KEY (site_code) REFERENCES dbo.sites(site_code)\r\n",
+                ");\r\n",
+                "CREATE TABLE dbo.points_of_use (\r\n",
+                "    point_of_use_no NVARCHAR(50) NOT NULL,\r\n",
+                "    comments NVARCHAR(MAX) NULL,\r\n",
+                "    active_container_no NVARCHAR(50) NULL,\r\n",
+                "    site_code NVARCHAR(50) NOT NULL,\r\n",
+                "    is_enabled BIT DEFAULT(1) NOT NULL,\r\n",
+                "    CONSTRAINT PK_points_of_use PRIMARY KEY (point_of_use_no, site_code),\r\n",
+                "    CONSTRAINT FK_points_of_use_parts FOREIGN KEY (active_container_no, site_code) REFERENCES dbo.parts(part_no, site_code),\r\n",
+                "    CONSTRAINT FK_points_of_use_sites FOREIGN KEY (site_code) REFERENCES dbo.sites(site_code)\r\n",
+                ");\r\n",
+                "CREATE TABLE dbo.containers (\r\n",
+                "    container_no NVARCHAR(50) NOT NULL,\r\n",
+                "    component_no NVARCHAR(50) NULL,\r\n",
+                "    site_code NVARCHAR(50) NOT NULL,\r\n",
+                "    is_enabled BIT DEFAULT(1) NOT NULL,\r\n",
+                "    CONSTRAINT PK_containers PRIMARY KEY (container_no, site_code),\r\n",
+                "    CONSTRAINT FK_containers_sites FOREIGN KEY (site_code) REFERENCES dbo.sites(site_code),\r\n",
+                "    CONSTRAINT FK_containers_parts FOREIGN KEY (component_no, site_code) REFERENCES dbo.parts(part_no, site_code),\r\n",
+                ");\r\n",
+                "\r\n",
+                "CREATE TABLE dbo.product_lines (\r\n",
+                "    product_line_code NVARCHAR(50) NOT NULL,\r\n",
+                "    active_part_no NVARCHAR(50) NULL,\r\n",
+                "    site_code NVARCHAR(50) NOT NULL,\r\n",
+                "    is_enabled BIT DEFAULT(1) NOT NULL,\r\n",
+                "    CONSTRAINT PK_product_lines PRIMARY KEY (product_line_code, site_code),\r\n",
+                "    CONSTRAINT FK_product_lines_sites FOREIGN KEY (site_code) REFERENCES dbo.sites(site_code),\r\n",
+                "    CONSTRAINT FK_product_lines_parts FOREIGN KEY (active_part_no, site_code) REFERENCES dbo.parts(part_no, site_code),\r\n",
+                ");\r\n",
+                "CREATE TABLE dbo.product_lines_points_of_use (\r\n",
+                "    product_line_code NVARCHAR(50) NOT NULL,\r\n",
+                "    point_of_use_no NVARCHAR(50) NOT NULL,\r\n",
+                "    ordinal INT NOT NULL,\r\n",
+                "    site_code NVARCHAR(50) NOT NULL,\r\n",
+                "    is_enabled BIT DEFAULT(1) NOT NULL,\r\n",
+                "    CONSTRAINT PK_product_lines_points_of_use PRIMARY KEY (product_line_code, point_of_use_no, site_code),\r\n",
+                "    CONSTRAINT FK_product_lines_points_of_use_sites FOREIGN KEY (site_code) REFERENCES dbo.sites(site_code),\r\n",
+                "    CONSTRAINT FK_product_lines_points_of_use_points_of_use FOREIGN KEY (point_of_use_no, site_code) REFERENCES dbo.points_of_use(point_of_use_no, site_code),\r\n",
+                "    CONSTRAINT FK_product_lines_points_of_use_product_lines FOREIGN KEY (product_line_code, site_code) REFERENCES dbo.product_lines(product_line_code, site_code)\r\n",
+                ");\r\n",
+                "CREATE TABLE bom (\r\n",
+                "    part_no NVARCHAR(50) NOT NULL,\r\n",
+                "    component_no NVARCHAR(50) NOT NULL,\r\n",
+                "    cardinality INT DEFAULT(1) NOT NULL,\r\n",
+                "    site_code NVARCHAR(50) NOT NULL,\r\n",
+                "    is_enabled BIT DEFAULT(1) NOT NULL,\r\n",
+                "    CONSTRAINT PK_bom PRIMARY KEY (part_no, component_no, site_code),\r\n",
+                "    CONSTRAINT UX_bom UNIQUE (part_no, component_no, site_code),\r\n",
+                "    CONSTRAINT FK_bom_sites FOREIGN KEY (site_code) REFERENCES dbo.sites(site_code),\r\n",
+                "    CONSTRAINT FK_bom_parts_1 FOREIGN KEY (part_no, site_code) REFERENCES dbo.parts(part_no, site_code),\r\n",
+                "    CONSTRAINT FK_bom_parts_2 FOREIGN KEY (component_no, site_code) REFERENCES dbo.parts(part_no, site_code)\r\n",
+                ");\r\n",
+                "CREATE TABLE dbo.product_line_bom_point_of_use_setting (\r\n",
+                "    product_line_code NVARCHAR(50) NOT NULL,\r\n",
+                "    point_of_use_no NVARCHAR(50) NOT NULL,\r\n",
+                "    part_no NVARCHAR(50) NOT NULL,\r\n",
+                "    component_no NVARCHAR(50) NOT NULL,\r\n",
+                "    site_code NVARCHAR(50) NOT NULL,\r\n",
+                "    CONSTRAINT PK_product_line_bom_point_of_use_setting PRIMARY KEY (product_line_code, point_of_use_no, part_no, component_no),\r\n",
+                "    CONSTRAINT FK_product_line_bom_point_of_use_setting_parts_1 FOREIGN KEY (part_no, site_code) REFERENCES dbo.parts(part_no, site_code),\r\n",
+                "    CONSTRAINT FK_product_line_bom_point_of_use_setting_parts_2 FOREIGN KEY (component_no, site_code) REFERENCES dbo.parts(part_no, site_code),\r\n",
+                "    CONSTRAINT FK_product_line_bom_point_of_use_setting_sites FOREIGN KEY (site_code) REFERENCES dbo.sites(site_code),\r\n",
+                "    CONSTRAINT FK_product_line_bom_point_of_use_setting_points_of_use FOREIGN KEY (point_of_use_no, site_code) REFERENCES dbo.points_of_use(point_of_use_no, site_code),\r\n",
+                "    CONSTRAINT FK_product_line_bom_point_of_use_setting_product_lines FOREIGN KEY (product_line_code, site_code) REFERENCES dbo.product_lines(product_line_code, site_code)\r\n",
+                ");\r\n",
+                "CREATE TABLE dbo.point_of_use_containers (\r\n",
+                "    point_of_use_no NVARCHAR(50) NOT NULL,\r\n",
+                "    container_no NVARCHAR(50) NOT NULL,\r\n",
+                "    site_code NVARCHAR(50) NOT NULL,\r\n",
+                "    time_stamp DATETIME DEFAULT(GETDATE()) NOT NULL,\r\n",
+                "    CONSTRAINT PK_point_of_use_containers PRIMARY KEY (container_no, point_of_use_no, site_code),\r\n",
+                "    CONSTRAINT FK_point_of_use_containers_sites FOREIGN KEY (site_code) REFERENCES dbo.sites(site_code),\r\n",
+                "    CONSTRAINT FK_point_of_use_containers_points_of_use FOREIGN KEY (point_of_use_no, site_code) REFERENCES dbo.points_of_use(point_of_use_no, site_code),\r\n",
+                "    CONSTRAINT FK_point_of_use_containers_containers FOREIGN KEY (container_no, site_code) REFERENCES dbo.containers(container_no, site_code)\r\n",
+                ");\r\n",
+                "*/\r\n",
+                ""
+            ],
+            "metadata": {
+                "language": "sql",
+                "azdata_cell_guid": "1644aaf8-dbcb-4b64-9d49-0ad39666b945"
+            },
+            "outputs": [],
+            "execution_count": null
+        }
+    ]
+}

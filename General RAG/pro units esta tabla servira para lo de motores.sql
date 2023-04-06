@@ -1,0 +1,1 @@
+SELECT * FROM dbo.pro_prod_units WHERE letter = 'LA'
