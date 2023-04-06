@@ -1,0 +1,16 @@
+trigger:
+- main
+
+pool:
+  name: default
+  
+steps:
+- script: |
+   git config --global user.email "r.arriaga@generaltranmissions.com"
+   git config --global user.name "RarriaGT"
+   git checkout main
+   git add --all
+   git push https://%git%@github.com/RarriagaGT/Querys_SQL.git --force
+  displayName: GitPus
+  env:
+    git: $(GIT)
