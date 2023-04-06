@@ -1,0 +1,22 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  name: default
+
+steps:
+- script: echo Hello, world!
+  displayName: 'Run a one-line script'
+
+- script: |
+    git config user.email "r.arriaga@generaltransmissions.com"
+    git config user.name "RarriagaGT"
+    git add --all
+    git commit -m "MXSRVDEV GT PUSH"
+    git push https://RarriagaGT:${{ secrets.GitHubPAT }}@github.com/TuNombreDeUsuarioDeGitHub/TuRepositorio.git
+  displayName: 'Push changes to GitHub'
