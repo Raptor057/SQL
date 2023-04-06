@@ -18,5 +18,5 @@ steps:
     git config user.name "RarriagaGT"
     git add --all
     git commit -m "MXSRVDEV GT PUSH"
-    git push https://RarriagaGT:${{ secrets.GitHubPAT }}@github.com/TuNombreDeUsuarioDeGitHub/TuRepositorio.git
+    git push https://RarriagaGT:${{ secrets.GitHubPAT }}@github.com/RarriagaGT/SQL.git
   displayName: 'Push changes to GitHub'
