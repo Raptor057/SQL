@@ -11,34 +11,6 @@ steps:
    git checkout main
    git add --all
    git push https://%git%@github.com/RarriagaGT/Querys_SQL.git --force
-  displayName: GitPus
+  displayName: GitPus From MXSRVDEV_GTMEX
   env:
     git: $(GIT)
-# trigger:
-#   - main
-
-# pool:
-#   name: default
-
-# steps:
-#   - name: Checkout code
-#     uses: actions/checkout@v2
-
-#   - name: Update git user info
-#     run: |
-#       git config --global user.email "r.arriaga@generaltranmissions.com"
-#       git config --global user.name "RarriaGT"
-
-#   - name: Commit changes
-#     run: |
-#       git add --all
-#       git commit -m "Updating some file"
-#       git push origin HEAD:main
-
-#   - name: Create pull request
-#     uses: peter-evans/create-pull-request@v3.11.1
-#     with:
-#       token: ${{ secrets.GITHUB_TOKEN }}
-#       commit-message: Automated pull request
-#       title: Update some file
-#       body: Changes have been made to some file
