@@ -1,4 +1,4 @@
-DECLARE @TableName sysname = 'PointOfUseEtis';
+DECLARE @TableName sysname = 'EventsHistory';
 SELECT
     @TableName = name
 FROM sys.tables

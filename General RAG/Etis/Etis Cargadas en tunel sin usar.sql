@@ -3,18 +3,25 @@ FROM dbo.LinePointsOfUse lpou
 JOIN dbo.PointOfUseEtis poue
     ON poue.PointOfUseCode = lpou.PointOfUseCode
     AND poue.UtcEffectiveTime <= GETUTCDATE() AND poue.UtcUsageTime IS NULL AND poue.UtcExpirationTime IS NULL
-WHERE lpou.LineCode = 'LH'
-and poue.PointOfUseCode = 'H05'
-and poue.PointOfUseCode = 'H01'
+WHERE lpou.LineCode = 'LA'
+ORDER by PointOfUseCode asc
+
+
+--ORDER by UtcEffectiveTime asc
+
+--ORDER by UtcEffectiveTime asc
+
+-- and poue.PointOfUseCode = 'H05'
+-- and poue.PointOfUseCode = 'H01'
 
 --36356
 --00594
 --32096
 
 --and poue.PointOfUseCode = 'E14'
-ORDER by UtcEffectiveTime asc
 
-select top 1  * FROM PointOfUseEtis where ComponentNo = '35' and UtcUsageTime is NULL and UtcExpirationTime is NULL --ORDER by UtcEffectiveTime asc
+
+--select top 1  * FROM PointOfUseEtis where ComponentNo = '35' and UtcUsageTime is NULL and UtcExpirationTime is NULL --ORDER by UtcEffectiveTime asc
 
 -- DECLARE @EtiID VARCHAR(max)
 -- set @EtiID = (select top 1 ID FROM PointOfUseEtis where PointOfUseCode = 'E19' and UtcUsageTime is NULL and UtcExpirationTime is NULL ORDER by UtcEffectiveTime asc)

@@ -15,10 +15,11 @@ set @Qty = '1'
 
 --Cambiar esto.
 ----------------------------------
-set @Linea ='Prueba'
+set @Linea ='Prueba' --Ejemplo: WB LA
 set @Part_Num = '042916'
 set @CodeWO = 'W042916'
 ----------------------------------
 
-insert into Tbl_qc_aproved_list (linea, part_num, codewo, qty, is_approved, fecha) VALUES (@Linea,@Part_Num,@CodeWO,@Qty, @Aproved,@Fecha)
+insert into [MXSRVTRACA].[TRAZAB].[dbo].[Tbl_qc_aproved_list] (linea, part_num, codewo, qty, is_approved, fecha) VALUES (@Linea,@Part_Num,@CodeWO,@Qty, @Aproved,@Fecha)
+
 
