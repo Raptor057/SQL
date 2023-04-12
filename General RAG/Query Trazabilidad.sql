@@ -36,30 +36,32 @@ La cláusula ORDER BY ordena los resultados por el código del punto de uso y el
 
 
 
-select top 1000 * from MXSRVTRACA.TRAZAB.dbo.Trazab_WB
-where NP_FINAL = '84969' and Telesis_no = '9496210'
+-- select top 1000 * from MXSRVTRACA.TRAZAB.dbo.Trazab_WB
+-- where NP_FINAL = '84969' and Telesis_no = '9496210'
 
-select * from MXSRVTRACA.TRAZAB.dbo.Etis_WB
---where NP_FINAL = '84969-10'
-where NP_FINAL = '84969-10'
+-- select * from MXSRVTRACA.TRAZAB.dbo.Etis_WB
+-- --where NP_FINAL = '84969-10'
+-- where NP_FINAL = '84969-10'
+-- --where NP_FINAL = '85691'
+-- order by fecha desc
 
-SELECT TOP 1 SET_ID FROM MXSRVTRACA.TRAZAB.dbo.Etis_WB WITH(NOLOCK) WHERE linea='WB LA' AND status=0
+-- SELECT TOP 1 SET_ID FROM MXSRVTRACA.TRAZAB.dbo.Etis_WB WITH(NOLOCK) WHERE linea='WB LA' AND status=0
 
-select top 3000 * from MXSRVTRACA.TRAZAB.dbo.Etis_WB where linea = 'WB LA' order by fecha desc
+-- select top 3000 * from MXSRVTRACA.TRAZAB.dbo.Etis_WB where linea = 'WB LA' order by fecha desc
 
-SET_ID = 'LA275926'
+--SET_ID = 'LA275926'
 
 -- SELECT @unitID AS Telesis_no, @lineName AS Linea, @operation AS no_empleado, 
 --        FORMAT(GETDATE(), 'dd-MMM-yyyy') AS fecha_scan, FORMAT(GETDATE(), 'hh:mm tt') AS hora_scan,
 --        (SELECT TOP 1 SET_ID FROM dbo.Etis_WB WITH(NOLOCK) WHERE linea=@lineName AND status=0) AS ETI_no, 
 --        @model AS MODELO, @partNo AS NP_FINAL, @codew AS codew
 
-select top 1000 * from MXSRVTRACA.TRAZAB.cegid.bom
+--select top 1000 * from MXSRVTRACA.TRAZAB.cegid.bom
 
 
 declare @unit_id VARCHAR(15)
 --SET @unit_id = '9496210'
-SET @unit_id = '9497602'
+SET @unit_id = '9504397'
 SELECT
     t.Linea [LineName],
     t.NP_FINAL [PartNo],
@@ -80,6 +82,40 @@ LEFT JOIN MXSRVTRACA.TRAZAB.cegid.bom bom
     AND bom.NOCTCODOPE = e.puesto_no AND RTRIM(bom.NOCTCODECP) = e.component
     AND CASE WHEN LEFT(bom.NOCTCOMCPT, 1) IN ('X', 'Y', '0','1','2') THEN bom.NOCTCOMCPT ELSE LEFT(bom.NOCTCOMCPT, 1) END
     = CASE WHEN LEFT(e.rev_cc, 1) IN ('X', 'Y', '0','1','2') THEN e.rev_cc ELSE LEFT(e.rev_cc, 1) END
-
+-- LEFT JOIN PointOfUseEtis a
+-- ON 
 WHERE t.Telesis_no=@unit_id
 ORDER BY e.puesto_no, e.component;
+
+
+declare @unit_id VARCHAR(15)
+--SET @unit_id = '9505060'
+--SET @unit_id = '9505061'
+--SET @unit_id = '9505060'
+--SET @unit_id = '7304464'
+SET @unit_id = '9504397'
+SELECT top 3000 *  FROM MXSRVTRACA.TRAZAB.dbo.Trazab_WB t
+-- WHERE
+--  t.Telesis_no=@unit_id
+--  and
+-- Linea = 'WB LA'
+-- and
+-- NP_FINAL = '87109-10'
+WHERE Telesis_NO < '9510592'
+order by Telesis_no DESC
+
+
+--Linea A
+select top 3000 * from MXSRVTRACA.TRAZAB.dbo.Etis_WB 
+where 
+SET_ID like ('LC203290')
+and
+linea = 'WB LC'
+ORDER BY puesto_no, component
+
+SELECT top 1 * FROM MXSRVTRACA.TRAZAB.dbo.Etis_WB  WITH(NOLOCK) WHERE linea='WB LO' AND status=0
+
+SELECT  * FROM MXSRVTRACA.TRAZAB.dbo.Etis_WB  WITH(NOLOCK) WHERE eti_no = 'E360714-T937951'
+
+--Line C
+select top 3000 * from MXSRVTRACA.TRAZAB.dbo.Etis_WB where SET_ID = 'LB244608' ORDER BY puesto_no, component
