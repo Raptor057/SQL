@@ -61,7 +61,7 @@ La cláusula ORDER BY ordena los resultados por el código del punto de uso y el
 
 declare @unit_id VARCHAR(15)
 --SET @unit_id = '9496210'
-SET @unit_id = '9504397'
+SET @unit_id = '8515985'
 SELECT
     t.Linea [LineName],
     t.NP_FINAL [PartNo],
@@ -113,9 +113,10 @@ and
 linea = 'WB LC'
 ORDER BY puesto_no, component
 
-SELECT top 1 * FROM MXSRVTRACA.TRAZAB.dbo.Etis_WB  WITH(NOLOCK) WHERE linea='WB LO' AND status=0
+SELECT top 1 * FROM MXSRVTRACA.TRAZAB.dbo.Etis_WB  WITH(NOLOCK) WHERE linea='WB LF' AND status=0 order BY creation_time DESC
 
-SELECT  * FROM MXSRVTRACA.TRAZAB.dbo.Etis_WB  WITH(NOLOCK) WHERE eti_no = 'E360714-T937951'
+SELECT top 1000 * FROM MXSRVTRACA.TRAZAB.dbo.Etis_WB   WITH(NOLOCK) order by creation_time desc  --eti_no = 'E360714-T937951'
 
 --Line C
-select top 3000 * from MXSRVTRACA.TRAZAB.dbo.Etis_WB where SET_ID = 'LB244608' ORDER BY puesto_no, component
+select top 3000 * from MXSRVTRACA.TRAZAB.dbo.Etis_WB /*where linea != 'WB LF'*/ order BY creation_time DESC
+--where SET_ID = 'LB244608' ORDER BY puesto_no, component

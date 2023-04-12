@@ -1,8 +1,8 @@
-SELECT TOP (1000) [UtcTimeStamp]
-      ,[UnitID]
-      ,[ProcessID]
-      ,[LineCode]
-  FROM [gtt].[dbo].[ProcessHistory] order by UtcTimeStamp DESC
+-- SELECT TOP (1000) [UtcTimeStamp]
+--       ,[UnitID]
+--       ,[ProcessID]
+--       ,[LineCode]
+--   FROM [gtt].[dbo].[ProcessHistory] order by UtcTimeStamp DESC
 
 
 
