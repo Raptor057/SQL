@@ -1,10 +1,19 @@
-SELECT poue.*
+SELECT lpou.LineCode,poue.*
 FROM dbo.LinePointsOfUse lpou
 JOIN dbo.PointOfUseEtis poue
     ON poue.PointOfUseCode = lpou.PointOfUseCode
     AND poue.UtcEffectiveTime <= GETUTCDATE() AND poue.UtcUsageTime IS NULL AND poue.UtcExpirationTime IS NULL
-WHERE lpou.LineCode = 'LA'
+WHERE lpou.LineCode like (CONCAT('%',@lineCode,'%'))
 ORDER by PointOfUseCode asc
+
+SELECT  DISTINCT(lpou.LineCode)
+FROM dbo.LinePointsOfUse lpou
+JOIN dbo.PointOfUseEtis poue
+    ON poue.PointOfUseCode = lpou.PointOfUseCode
+    AND poue.UtcEffectiveTime <= GETUTCDATE() AND poue.UtcUsageTime IS NULL AND poue.UtcExpirationTime IS NULL
+--WHERE lpou.LineCode = 'MU'
+ORDER by lpou.LineCode asc
+
 
 
 --ORDER by UtcEffectiveTime asc
