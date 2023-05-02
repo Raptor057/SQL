@@ -3,13 +3,13 @@ declare @date1 DATETIME,
 @message varchar(50),
 @lineCode varchar (2)
 
-set @date1 = '2023-01-01 00:00:00.807'
-set @date2 = '2023-04-13 00:00:00.807'
+set @date1 = (GETDATE()-1)
+set @date2 = (GETDATE()+1)
 -- set @message = 'se encuentra en uso en el túnel'
 -- set @message = 'no se encuentra cargada'
 -- set @message = 'no corresponde con ningún punto de uso para la gama'
 set @message = null
-set @lineCode = ''
+--set @lineCode = ''
 -- SELECT
 --     CONVERT(DATE, [dbo].[UfnToLocalTime]([UtcTimeStamp])) AS [Fecha]
 --     ,FORMAT(CONVERT(DATETIME, [dbo].[UfnToLocalTime]([UtcTimeStamp])), 'hh:mm tt') AS [Hora]
@@ -89,5 +89,5 @@ SELECT
     CONVERT(DATE, [dbo].[UfnToLocalTime](MAX([UtcTimeStamp]))) AS [Fecha],
     FORMAT(CONVERT(DATETIME, [dbo].[UfnToLocalTime](MAX([UtcTimeStamp]))), 'hh:mm tt') AS [Hora]
 FROM [gtt].[dbo].[EventsHistory] 
-WHERE ClientMessage LIKE (CONCAT('%',@message,'%')) AND [UtcTimeStamp] BETWEEN @date1 AND @date2 AND LineCode LIKE (@lineCode) 
+WHERE ClientMessage LIKE (CONCAT('%',@message,'%')) AND [UtcTimeStamp] BETWEEN @date1 AND @date2 --AND LineCode LIKE (@lineCode) 
 GROUP BY [ClientMessage], [LineCode]

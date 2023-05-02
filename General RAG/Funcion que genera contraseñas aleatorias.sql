@@ -1,4 +1,4 @@
-Create FUNCTION [dbo].[UfnGenerateRandomPassword] 
+--Create FUNCTION [dbo].[UfnGenerateRandomPassword] 
 (
 -- =============================================
 --Function To generate random character strings
