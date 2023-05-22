@@ -15,9 +15,9 @@ set @Qty = '1'
 
 --Cambiar esto.
 ----------------------------------
-set @Linea ='WB LF' --Ejemplo: WB LA
-set @Part_Num = '82015'
-set @CodeWO = 'W07846083'
+set @Linea ='WB LP' --Ejemplo: WB LA
+set @Part_Num = '85633'
+set @CodeWO = 'W07982821'
 ----------------------------------
 
 insert into [MXSRVTRACA].[TRAZAB].[dbo].[Tbl_qc_aproved_list] (linea, part_num, codewo, qty, is_approved, fecha) VALUES (@Linea,@Part_Num,@CodeWO,@Qty, @Aproved,@Fecha)
