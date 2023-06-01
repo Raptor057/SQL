@@ -12,7 +12,7 @@
 @componentNo NVARCHAR(50),
 @unitID nvarchar (50)
 -- set @componentNo = null
- set @UnitID = '9609934'
+ set @UnitID = '9684748'
     SELECT
         ROW_NUMBER() OVER(ORDER BY e.PointOfUseCode, e.ComponentNo) [SeqNo],
         t.LineCode, p.PartNo, e.PointOfUseCode, e.ComponentNo, 
@@ -23,18 +23,18 @@
         CAST(e.UtcExpirationTime AT TIME ZONE 'UTC' AT TIME ZONE gs.TimeZone AS DATETIME) [ExpirationTime]
     FROM dbo.ProcessHistory t WITH(NOLOCK)
     CROSS JOIN GlobalSettings gs
-    JOIN dbo.LineProcessPointsOfUse pou
+   LEFT JOIN dbo.LineProcessPointsOfUse pou
         ON pou.LineCode = t.LineCode AND pou.ProcessID = t.ProcessID
         AND pou.UtcEffectiveTime <= t.UtcTimeStamp AND t.UtcTimeStamp < pou.UtcExpirationTime
-    JOIN dbo.LineProductionSchedule p
+    LEFT JOIN dbo.LineProductionSchedule p
         ON p.LineCode = t.LineCode
         AND p.UtcEffectiveTime <= t.UtcTimeStamp AND t.UtcTimeStamp < p.UtcExpirationTime
-    JOIN dbo.PointOfUseEtis e
+    LEFT JOIN dbo.PointOfUseEtis e
         ON e.PointOfUseCode = pou.PointOfUseCode 
         --AND (@componentNo IS NULL OR @componentNo = e.ComponentNo)
         AND e.UtcUsageTime <= t.UtcTimeStamp
         AND (e.UtcExpirationTime IS NULL OR t.UtcTimeStamp < e.UtcExpirationTime)
-    JOIN dbo.LineProductionSchedule ps
+   LEFT JOIN dbo.LineProductionSchedule ps
         ON ps.LineCode = t.LineCode
         AND ps.UtcEffectiveTime <= t.UtcTimeStamp AND t.UtcTimeStamp < ps.UtcExpirationTime
     LEFT JOIN dbo.LineGamma g

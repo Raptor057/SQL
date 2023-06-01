@@ -1,4 +1,4 @@
-DECLARE @TableName sysname = 'EventsHistory';
+DECLARE @TableName sysname = 'ValidationRequiredParts';
 SELECT
     @TableName = name
 FROM sys.tables
