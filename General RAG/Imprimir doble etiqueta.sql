@@ -5,7 +5,7 @@ se agrega en la variable @linecode
 
 declare @codew nvarchar (50),
 @lineCode NVARCHAR (4)
-SET @lineCode = 'LB' --<==== aqui cambiar la linea
+SET @lineCode = 'LE' --<==== aqui cambiar la linea
 SET @codew = (select codew AS [Numero de Orden]from [mxsrvtraca].[apps].[dbo].[pro_prod_units] WHERE comments LIKE (CONCAT('%',@lineCode,'%'))) -- aqui va el numero de orden de lo que se esta corriendo
 --SET @codew = 'W07817236' -- aqui va el numero de orden de lo que se esta corriendo
 --select (@codew + ' ' + @lineCode)

@@ -10,7 +10,7 @@ JOIN dbo.PointOfUseEtis poue
 -- LEFT JOIN [MXSRVTRACA].[TRAZAB].[dbo].[eti_packing_counters] c
 --     ON c.eti_no COLLATE SQL_Latin1_General_CP1_CI_AS = poue.EtiNo
 
-WHERE lpou.LineCode = 'LH'
+WHERE lpou.LineCode = 'LB'
 --and poue.PointOfUseCode = 'E25' 
 order by PointOfUseCode asc
 
@@ -38,3 +38,14 @@ order by PointOfUseCode asc
 
 --UPDATE PointOfUseEtis set PointOfUseCode = 'E25' WHERE ComponentNo = '44419'
 --DELETE PointOfUseEtis WHERE id = '77885'
+
+
+SELECT poue.* 
+FROM dbo.LinePointsOfUse lpou
+JOIN dbo.PointOfUseEtis poue
+    ON poue.PointOfUseCode = lpou.PointOfUseCode
+    AND poue.UtcUsageTime <= GETUTCDATE() AND poue.UtcExpirationTime IS NULL
+WHERE lpou.LineCode = 'LB'
+order by PointOfUseCode asc
+
+

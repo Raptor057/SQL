@@ -3,8 +3,8 @@ declare
 @LineCode VARCHAR (20),
 @PartNo VARCHAR (50)
 
-set @LineCode = 'LC'
-set @PartNo = 'GT84531U'
+set @LineCode = 'LA'
+set @PartNo = '87109'
 
 EXEC dbo.UspUpdateLineGamma @LineCode, @PartNo, @LineCode;
 

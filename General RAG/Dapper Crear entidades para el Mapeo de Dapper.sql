@@ -1,4 +1,4 @@
-DECLARE @TableName sysname = 'ValidationRequiredParts';
+DECLARE @TableName sysname = 'EZ2000Motors';
 SELECT
     @TableName = name
 FROM sys.tables
