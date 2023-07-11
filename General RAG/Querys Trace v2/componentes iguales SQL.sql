@@ -1,9 +1,11 @@
 DECLARE @part_rev VARCHAR(15),
 @part_no VARCHAR(15)
-SET @part_no = '85208'
-SET @part_rev = 'LC'
+SET @part_no = '85540'
+SET @part_rev = 'LB'
 
-SELECT TOP (1000) 
+--SELECT COUNT(*)
+--FROM (
+SELECT 
 NOKTCODPF,	
 NOKTCOMPF,
 NOCTCODECP,
@@ -39,7 +41,6 @@ SELECT
 			u.ARKCRITPAR COLLATE SQL_Latin1_General_CP1_CI_AS AS [ARKCRITPAR],
 			u.APKSTDPACK AS [APKSTDPACK]                  -- standard pack
 		FROM MXSRVCEGID.PMI.dbo.NOMENC n with(nolock)
-
 		JOIN MXSRVCEGID.PMI.dbo.ARTICLE a with(nolock)
 			ON a.ARKTSOC = n.NOKTSOC AND a.ARCTFATN != 17 --AND a.ARCTCODFAM IN ('CMP','PMQ','PM', 'DIV')
 			AND a.ARKTCODART = n.NOCTCODECP AND a.ARKTCOMART = n.NOCTCOMCPT
@@ -53,3 +54,4 @@ SELECT
 
 		WHERE n.NOKTSOC = '300' AND NOT (n.NOCTCODOPE = '' OR n.NOCTCODOPE IS NULL)
 		and RTRIM(n.NOKTCODPF) = UPPER(@part_no) and RTRIM(n.NOKTCOMPF) = UPPER(@part_rev)
+		--) AS subquery;

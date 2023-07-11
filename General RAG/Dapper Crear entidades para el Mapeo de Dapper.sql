@@ -1,4 +1,4 @@
-DECLARE @TableName sysname = 'EZ2000Motors';
+DECLARE @TableName sysname = 'cegid.bom';
 SELECT
     @TableName = name
 FROM sys.tables
