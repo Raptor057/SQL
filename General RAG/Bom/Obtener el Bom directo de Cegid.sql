@@ -71,8 +71,9 @@
 			and z.ARCTFATN != 17
 		where n.NOKTSOC = '300'
         -- 03-09-22 PMI is case sensitive
-        and RTRIM(n.NOKTCODPF) = UPPER('GT84915') and RTRIM(n.NOKTCOMPF) = UPPER('LJ')
+        and RTRIM(n.NOKTCODPF) = UPPER('85256') and RTRIM(n.NOKTCOMPF) = UPPER('LA')
         and not (n.NOCTCODOPE = '' OR n.NOCTCODOPE IS NULL)
+        --AND n.NOCTCODOPE LIKE ('%B%')
 --EXCEPT
 	-- 	SELECT top 100 [NOKTCODPF]
     --   ,[NOKTCOMPF]
