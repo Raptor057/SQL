@@ -16,4 +16,5 @@ WHERE
     PU.UtcExpirationTime IS NULL
     AND PU.IsDepleted != 1 
     AND PS.UtcExpirationTime > GETUTCDATE()
+    AND PS.PartNo = '87245'
 ORDER BY Tunel asc,UtcUsageTime desc

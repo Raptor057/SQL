@@ -15,12 +15,14 @@ set @Qty = '1'
 
 --Cambiar esto.
 ----------------------------------
-set @Linea ='WB LP' --Ejemplo: WB LA
-set @Part_Num = '85633'
+set @Linea ='WB LA' --Ejemplo: WB LA
+set @Part_Num = '85691'
 --set @CodeWO = 'W07982821'
-set @CodeWO = 'W07993773'
+set @CodeWO = 'W08110701'
 ----------------------------------
 
-insert into [MXSRVTRACA].[TRAZAB].[dbo].[Tbl_qc_aproved_list] (linea, part_num, codewo, qty, is_approved, fecha) VALUES (@Linea,@Part_Num,@CodeWO,@Qty, @Aproved,@Fecha)
+select * from [MXSRVTRACA].[TRAZAB].[dbo].[Tbl_qc_aproved_list] where linea = @Linea ORDER BY id desc
+
+--insert into [MXSRVTRACA].[TRAZAB].[dbo].[Tbl_qc_aproved_list] (linea, part_num, codewo, qty, is_approved, fecha) VALUES (@Linea,@Part_Num,@CodeWO,@Qty, @Aproved,@Fecha)
 
 

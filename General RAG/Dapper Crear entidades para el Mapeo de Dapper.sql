@@ -1,4 +1,4 @@
-DECLARE @TableName sysname = 'cegid.bom';
+DECLARE @TableName sysname = 'SubAssemblies';
 SELECT
     @TableName = name
 FROM sys.tables
