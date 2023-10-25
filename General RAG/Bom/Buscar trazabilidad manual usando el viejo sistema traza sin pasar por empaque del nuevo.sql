@@ -1,0 +1,42 @@
+SELECT DISTINCT t.line,t.id,t.created_at,cb.NOCTCODECP,cb.NOCTCODOPE,cb.ARCTLIB01,tr.ETI_no 
+FROM mxsrvtraca.APPS.dbo.pro_tms t
+LEFT JOIN mxsrvtraca.TRAZAB.cegid.bom cb ON RTRIM(cb.NOKTCODPF) = RTRIM(t.serial) AND RTRIM(t.line) = RTRIM(cb.NOKTCOMPF)
+LEFT JOIN mxsrvtraca.[TRAZAB].[dbo].[Trazab_Rider] tr ON cb.NOCTCODECP = tr.component_number AND t.created_at >= CONVERT(datetime, [fecha_scan] + ' ' + [hora_scan], 0) AND  CONVERT(datetime, [fecha_scan] + ' ' + [hora_scan], 0) <= t.created_at AND t.serial = tr.NP_FINAL
+ WHERE t.line LIKE ('%LE%') AND t.serial = 'GT87145U' and t.id  IN ('10014330',
+'10014491',
+'10014558',
+'10014584',
+'10014678',
+'10014698',
+'10014715',
+'10014722',
+'10014744',
+'10014772',
+'10014787',
+'10014801',
+'10014828',
+'10014857',
+'10014914',
+'10014921',
+'10014927',
+'10014933',
+'10014952',
+'10014959',
+'10014965',
+'10014975',
+'10014980',
+'10015012',
+'10015018',
+'10015026',
+'10015045',
+'10015061',
+'10015066',
+'10015086',
+'10015092',
+'10015100',
+'10015107',
+'10015111',
+'10015184',
+'10015193')
+order by t.id ,cb.NOCTCODOPE ASC
+

@@ -4,8 +4,8 @@ declare
 @LineCode VARCHAR (20),
 @PartNo VARCHAR (50)
 
-set @LineCode = 'LN'
-set @PartNo = 'GT84725U'
+set @LineCode = 'LE'
+set @PartNo = 'GT87145U'
 
 
 --EXECUTE [dbo].[usp_update_bom_info] 'GT87145', 'LE'

@@ -6,7 +6,7 @@ declare
 set @LineCode = 'LE'
 set @PartNo = 'GT85540'
 
-EXEC dbo.UspUpdateLineGamma @LineCode, @PartNo, @LineCode;
+EXEC dbo.UspUpdateLineGamma @lineCode, @partNo, @lineCode;
 
 --EXEC dbo.UspUpdateLineGamma @LineCode, @PartNo, @LineCode;
 --EXECUTE [MXSRVTRACA].[TRAZAB].[dbo].[usp_update_bom_info] '82015', 'LF'
