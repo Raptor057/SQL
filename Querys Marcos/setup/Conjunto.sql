@@ -65,3 +65,5 @@ VALUES(@LineCode,2,'2022-01-01','2099-12-31')
 EXEC InsertLineShiftSchedule @LineCode;
 
 SELECT * from LineShiftSchedules where LineCode = @LineCode
+
+
