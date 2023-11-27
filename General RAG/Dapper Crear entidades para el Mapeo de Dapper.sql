@@ -1,4 +1,4 @@
-DECLARE @TableName sysname = 'SubAssemblies';
+DECLARE @TableName sysname = 'MotorsData';
 SELECT
     @TableName = name
 FROM sys.tables

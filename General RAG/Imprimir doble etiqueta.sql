@@ -12,4 +12,4 @@ SET @codew = (select codew AS [Numero de Orden]from [mxsrvtraca].[apps].[dbo].[p
 --select comments AS [LINEA], modelo AS [Modelo],codew AS [Numero de Orden]from mxsrvtraca.apps.dbo.pro_prod_units
 --select codew AS [Numero de Orden]from mxsrvtraca.apps.dbo.pro_prod_units WHERE comments LIKE (@lineCode)
 select * from [MXSRVTRACA].[APPS].[dbo].[pro_production]  where codew = @codew
-UPDATE pro_production SET dblid = 2 WHERE codew = 'W07817724'--@codew
+UPDATE pro_production SET dblid = 2 WHERE codew = 'W08226933'--@codew

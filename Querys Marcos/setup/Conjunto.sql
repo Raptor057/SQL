@@ -2,8 +2,8 @@
 DECLARE @LineCode VARCHAR(2)
 DECLARE @NumTunel INT
 
-set @LineCode = '' --Si es una linea comun y corriente sin procesos extra solo pon el identificador de la linea ejemplo LA,LB,LC,MW,MX etc. solo 2 letras y en MAYUSCULAS
-SET @NumTunel = 0 --Int mayor a 9 IMPORTANTE!!
+set @LineCode = 'MW' --Si es una linea comun y corriente sin procesos extra solo pon el identificador de la linea ejemplo LA,LB,LC,MW,MX etc. solo 2 letras y en MAYUSCULAS
+SET @NumTunel = 50 --Int mayor a 9 IMPORTANTE!!
 
 /* 1) Crear los tuneles
 se ejecuta este SP para crear los tuneles
@@ -13,8 +13,8 @@ ese indica la cantidad de tuneles que seran insertados
 este SP no agrega los tuneles de grasa para el caso de WB asi que se tendran que asgregar manual en la tabla
 LinePointsOfUse en la base de datos gtt del servidor MXSRVAPPS*/
 
-EXEC InsertLinePointsOfUse @LineCode, @NumTunel;
-SELECT * from LinePointsOfUse where LineCode = @LineCode
+--EXEC InsertLinePointsOfUse @LineCode, @NumTunel;
+--SELECT * from LinePointsOfUse where LineCode = @LineCode
 
 
 /**
@@ -38,7 +38,7 @@ SELECT * from LinePointsOfUse where LineCode = @LineCode
 -- este query es para saber si los tuneles tienen trazabilidad. se tiene que agregar un registro si se agrega un tunel
 --El valor que se va a dar es el de la linea creada en el paso 1
 
-EXEC InsertLineProcessPointsOfUse @LineCode;
+--EXEC InsertLineProcessPointsOfUse @LineCode;
 
 SELECT * FROM dbo.LineProcessPointsOfUse where LineCode = @LineCode
 
@@ -52,7 +52,7 @@ MX	        900	        0	            1
 
 si la linea tiene mas turas se tienen que agregar manualmente o en su defecto no ejecutar este SP
 */
-EXEC InsertLineRouting @LineCode;
+--EXEC InsertLineRouting @LineCode;
 
 select * from LineRouting WHERE LineCode = @LineCode
 
@@ -62,7 +62,7 @@ select * from LineRouting WHERE LineCode = @LineCode
 insert into LineShiftSchedules (LineCode,ShiftScheduleID,EffectiveDay,ExpirationDay)
 VALUES(@LineCode,2,'2022-01-01','2099-12-31')
 */
-EXEC InsertLineShiftSchedule @LineCode;
+--EXEC InsertLineShiftSchedule @LineCode;
 
 SELECT * from LineShiftSchedules where LineCode = @LineCode
 
