@@ -11,7 +11,7 @@ SET @EtiNo = ''
 SET @ComponentNo = ''
 
 SELECT TOP 1000 * FROM [gtt].[dbo].[PointOfUseEtis]
-WHERE (PointOfUseCode LIKE (CONCAT('%',@Line,'%')) OR EtiNo = @EtiNo OR @ComponentNo = @ComponentNo)
+WHERE PointOfUseCode LIKE (CONCAT('%',@Line,'%')) --OR EtiNo = @EtiNo OR @ComponentNo = @ComponentNo
 -- AND UtcUsageTime IS NULL AND UtcExpirationTime IS NULL                          -- 1) Descomentar esta linea para ver las etiquetas cargadas pero no usadas
 -- AND UtcUsageTime IS NOT NULL AND UtcExpirationTime IS NULL                      -- 2) Descomentar esta linea para ver las etiquetas usadas en momento
 -- AND UtcUsageTime is NULL AND UtcExpirationTime IS NOT NULL and IsDepleted != 1  -- 3) Descomentar esta linea para ver las etiquetas descargadas mas no consumidas ni usadas (Retorno sin usar)
