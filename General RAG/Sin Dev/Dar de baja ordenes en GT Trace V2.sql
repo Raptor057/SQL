@@ -1,4 +1,5 @@
 /*
+DB GTT
 Este Query sirve para ver todas las ordenes activas en el sistema GTT
 */
 SELECT TOP (1000) * FROM [gtt].[dbo].[LineProductionSchedule] WHERE UtcExpirationTime > GETUTCDATE()
