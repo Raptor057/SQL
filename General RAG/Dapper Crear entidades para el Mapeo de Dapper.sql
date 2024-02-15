@@ -1,4 +1,4 @@
-DECLARE @TableName sysname = 'TEST_PROTOS';
+DECLARE @TableName sysname = 'LineProductionSchedule';
 SELECT
     @TableName = name
 FROM sys.tables
