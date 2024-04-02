@@ -1,0 +1,78 @@
+SELECT TOP (1000) [id]
+      ,[part_number]
+      ,[std_pack]
+      ,[lot]
+      ,[qty]
+      ,[initial_qty]
+      ,[created_at]
+      ,[current_location_id]
+      ,[date_wh_loc]
+      ,[is_open]
+      ,[scale_type]
+      ,[is_verified]
+      ,[is_approved]
+      ,[type]
+      ,[reference]
+      ,[supplier]
+      ,[ref_ext]
+      ,[rev]
+      ,[rev_cc]
+      ,[pre_rev]
+      ,[date_changed_rev]
+      ,[id_user_changed_rev]
+      ,[reason_changed_rev]
+      ,[pre_ref]
+      ,[date_changed_ref]
+      ,[id_user_changed_ref]
+      ,[reason_changed_ref]
+      ,[description]
+      ,[next_op]
+      ,[sample_pc]
+      ,[sample_tara]
+      ,[sample_container]
+      ,[manual_qty]
+      ,[reason_manual]
+      ,[reason_manual_user]
+      ,[machine]
+      ,[shift]
+      ,[created_by]
+      ,[last_mod_date]
+      ,[last_mod_user]
+      ,[prod_report_date]
+      ,[prod_report_user]
+      ,[prod_report_reference]
+      ,[Blocked]
+      ,[date_blocked]
+      ,[RMNC]
+      ,[date_released]
+      ,[corona_approved]
+      ,[corona_app_date]
+      ,[traetment_req]
+      ,[was_printed]
+      ,[cert_ontime]
+      ,[description2]
+      ,[packing_count]
+      ,[approval_date]
+      ,[is_active]
+      ,[poline]
+  FROM [APPS].[dbo].[pro_eti001] WHERE 
+  --id  in ('418509','415281')--= 433269
+  --lot LIKE '%415281%'
+id IN (
+    '418632',
+'433269',
+'417083',
+'418509',
+'417084',
+'415281',
+'418509')
+
+  /*
+'418632',
+'433269',
+'417083',
+'418509',
+'417084',
+'415281',
+'418509'
+  */
