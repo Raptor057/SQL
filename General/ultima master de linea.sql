@@ -1,0 +1,1 @@
+select top 10 * from Master_labels_WB where line='WB LP' and fecha='30-Sep-2021' order by id desc

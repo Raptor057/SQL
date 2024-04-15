@@ -1,0 +1,1 @@
+SELECT TOP (1000) *  FROM [APPS].[dbo].[pro_prod_units] WHERE output_is_subassembly = 1

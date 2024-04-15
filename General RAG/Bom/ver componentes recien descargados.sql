@@ -1,0 +1,1 @@
+SELECT TOP (17) *  FROM [gtt].[dbo].[PointOfUseEtis] WHERE PointOfUseCode LIKE ('%B%') AND UtcUsageTime is not NULL and IsDepleted != 1 order BY UtcExpirationTime DESC

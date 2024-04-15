@@ -1,0 +1,7 @@
+DECLARE @UnitID BIGINT
+set @UnitID = '9721482'
+SELECT * FROM [gtt].[dbo].[EZ2000Motors] WHERE UnitID = @UnitID order BY ID DESC
+
+--SELECT COUNT(DISTINCT(UnitID)) AS [UnitID] FROM [gtt].[dbo].[EZ2000Motors] WHERE UnitID = @UnitID --order BY ID DESC
+
+--SELECT COUNT(DISTINCT(UnitID)) AS [UnitID] FROM EZ2000Motors WHERE UnitID = @UnitID
