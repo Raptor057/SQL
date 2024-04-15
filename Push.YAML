@@ -3,7 +3,7 @@ name: Commit and Push
 on:
   push:
     branches:
-      - main  # Puedes cambiar esto al nombre de tu rama principal si es diferente
+      - main
 
 jobs:
   commit_and_push:
@@ -16,7 +16,7 @@ jobs:
     - name: Set up SSH key
       uses: webfactory/ssh-agent@v0.5.3
       with:
-        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}  # Asegúrate de haber configurado esta clave SSH como un secreto en la configuración del repositorio
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
     - name: Configure git
       run: |
