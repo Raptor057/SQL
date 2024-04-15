@@ -28,3 +28,4 @@ jobs:
         git add .
         git commit -m "Automatic commit from GitHub Actions"
         git push git@github.com:Raptor057/SQL.git HEAD:main
+
