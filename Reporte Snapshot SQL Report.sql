@@ -23,3 +23,5 @@ FROM [gtt].[dbo].[ComponentsSnapShot] CSS
 INNER JOIN [gtt].[dbo].[UnitIDShapshotHistory] UISH
 ON CSS.SnapShotID = UISH.SnapShotID 
 WHERE UISH.[UnitID] = @UnitID
+
+
