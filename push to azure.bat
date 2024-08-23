@@ -1,1 +1,0 @@
-git push git@ssh.dev.azure.com:v3/AzureGTDevOps/SQL/SQL main

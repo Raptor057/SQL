@@ -1,4 +1,4 @@
-DECLARE @TableName sysname = 'LineProductionSchedule';
+DECLARE @TableName sysname = 'ZARTICLE_API';
 SELECT
     @TableName = name
 FROM sys.tables
