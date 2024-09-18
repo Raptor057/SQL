@@ -1,4 +1,4 @@
-DECLARE @TableName sysname = 'ZARTICLE_API';
+DECLARE @TableName sysname = 'EsdResultTest';
 SELECT
     @TableName = name
 FROM sys.tables
