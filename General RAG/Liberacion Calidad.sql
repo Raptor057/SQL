@@ -15,10 +15,10 @@ set @Qty = '1'
 
 --Cambiar esto.
 ----------------------------------
-set @Linea ='WB LA' --Ejemplo: WB LA
-set @Part_Num = '85079-10'
+set @Linea ='WB LB' --Ejemplo: WB LA
+set @Part_Num = '85540'
 --set @CodeWO = 'W07982821'
-set @CodeWO = 'W08495136'
+set @CodeWO = 'W08622510'
 ----------------------------------
 
 --select * from [MXSRVTRACA].[TRAZAB].[dbo].[Tbl_qc_aproved_list] where linea = @Linea ORDER BY id desc

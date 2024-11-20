@@ -1,4 +1,4 @@
-DECLARE @TableName sysname = 'EsdResultTest';
+DECLARE @TableName sysname = 'UserRoles';
 SELECT
     @TableName = name
 FROM sys.tables

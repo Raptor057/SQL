@@ -10,9 +10,10 @@
 --   --order BY item_id DESC,operation_id ASC
 
 
-DECLARE @item_id INT = 999;
+DECLARE @item_id INT = 1045;
 DECLARE @operation_id INT;
-WHILE @item_id <= 1044
+
+WHILE @item_id <= 1744
 BEGIN
 INSERT INTO [water_heater_repair].[dbo].[items_x_operations] (item_id, operation_id, initial_status)
 VALUES
