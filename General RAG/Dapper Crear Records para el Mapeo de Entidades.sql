@@ -1,10 +1,10 @@
-DECLARE @TableName sysname = 'CashMovements';
+DECLARE @TableName sysname = 'SaleStatuses';
 SELECT
     @TableName = name
 FROM sys.tables
 WHERE name = @TableName;
 
-DECLARE @Result VARCHAR(MAX) = 'public record ' + @TableName +'Dto' + ' (
+DECLARE @Result VARCHAR(MAX) = 'public record ' + @TableName +'Dto' + '(
 ';
 
 SELECT @Result = @Result + '

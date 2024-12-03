@@ -1,4 +1,4 @@
-DECLARE @TableName sysname = 'CashMovements';
+DECLARE @TableName sysname = 'SaleStatuses';
 SELECT
     @TableName = name
 FROM sys.tables
